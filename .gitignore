@@ -8,6 +8,7 @@ yarn-error.log*
 dist/
 build/
 *.log
+design-system/dist/*.css
 
 # IDE & Editor files
 .vscode/
