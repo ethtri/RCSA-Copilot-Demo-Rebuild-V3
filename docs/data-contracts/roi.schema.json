@@ -1,0 +1,168 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rcsa-demo.captech.com/schemas/roi.schema.json",
+  "title": "ROI Calculator Data Contract",
+  "description": "Defines the mock payload powering the ROI calculator per Sprint 1 Stream 1.3.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "defaults",
+    "multipliers",
+    "copy",
+    "formatting"
+  ],
+  "properties": {
+    "version": {
+      "type": "string",
+      "pattern": "^v\\d+\\.\\d+(\\.\\d+)?$",
+      "description": "Semantic version so downstream consumers can coordinate changes."
+    },
+    "source": {
+      "type": "string",
+      "description": "Optional reference back to documentation or manifest entry."
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO timestamp for the last data refresh."
+    },
+    "defaults": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "assessmentsPerMonth",
+        "baselineHoursPerAssessment",
+        "managers",
+        "hourlyCost"
+      ],
+      "properties": {
+        "assessmentsPerMonth": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Default number of assessments performed each month."
+        },
+        "baselineHoursPerAssessment": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Average manual hours currently required per assessment."
+        },
+        "managers": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Number of managers/licensed users participating in the program."
+        },
+        "hourlyCost": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Blended hourly cost for participating resources."
+        }
+      }
+    },
+    "multipliers": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "timeReduction",
+        "platformCostPerManager"
+      ],
+      "properties": {
+        "timeReduction": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "exclusiveMaximum": 1,
+          "description": "Percentage reduction (0-1) in assessment time delivered by AI."
+        },
+        "platformCostPerManager": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Annual platform subscription cost for each manager."
+        },
+        "assessmentToYearMultiplier": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 12,
+          "description": "Scalar applied to convert monthly assessments into annual totals."
+        }
+      }
+    },
+    "copy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "headline",
+        "subheader",
+        "cta",
+        "disclaimer"
+      ],
+      "properties": {
+        "headline": {
+          "type": "string",
+          "minLength": 1
+        },
+        "subheader": {
+          "type": "string",
+          "minLength": 1
+        },
+        "cta": {
+          "type": "string",
+          "minLength": 1
+        },
+        "disclaimer": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "formatting": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "currency",
+        "numberLocale"
+      ],
+      "properties": {
+        "currency": {
+          "type": "string",
+          "pattern": "^[A-Z]{3}$"
+        },
+        "numberLocale": {
+          "type": "string",
+          "minLength": 2
+        },
+        "valueLabels": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "annualHoursSaved": {
+              "type": "string"
+            },
+            "annualCostSaved": {
+              "type": "string"
+            },
+            "efficiencyGain": {
+              "type": "string"
+            },
+            "roiPercent": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "thresholds": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "maxManagers": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "maxAssessmentsPerMonth": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    }
+  }
+}

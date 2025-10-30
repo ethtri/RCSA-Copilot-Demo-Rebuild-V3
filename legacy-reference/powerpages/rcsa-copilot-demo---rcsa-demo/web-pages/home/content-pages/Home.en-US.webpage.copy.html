@@ -1,0 +1,1385 @@
+<!-- RCSA AI-Powered Homepage - Executive Demo Ready -->
+
+<!-- Load required external resources -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+
+<!-- Link to RCSA Design System -->
+<link rel="stylesheet" href="rcsa-styles.css">
+
+<style>
+    /* RCSA Design System Variables - Proper CapTech Branding */
+    :root {
+        --captech-primary: #0066CC !important;
+        --captech-primary-light: #3385D6 !important;
+        --captech-primary-dark: #004499 !important;
+        --captech-success: #0D7F3F !important;
+        --captech-warning: #CC6600 !important;
+        --captech-danger: #CC0000 !important;
+        --captech-orange: #FEA002 !important;
+        --captech-gray-50: #F8F9FA !important;
+        --captech-gray-100: #E9ECEF !important;
+        --captech-gray-700: #212529 !important;
+        --captech-white: #FFFFFF !important;
+    }
+    
+    /* Optimize Power Pages Layout - Professional Approach */
+    body {
+        padding-top: 88px !important; /* Account for fixed header */
+        margin: 0;
+        font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+        line-height: 1.6;
+        color: var(--captech-gray-700);
+        background-color: var(--captech-gray-50);
+    }
+    
+    /* Ensure content displays properly */
+    .hero-section {
+        position: relative;
+        z-index: 1;
+        display: block !important;
+        visibility: visible !important;
+    }
+    
+    /* Optimize container layout */
+    .wrapper-body,
+    .page-copy,
+    #mainContent {
+        width: 100% !important;
+        display: block !important;
+        visibility: visible !important;
+    }
+    
+    .page-copy {
+        padding: 0 !important;
+        margin: 0 !important;
+        max-width: none !important;
+    }
+    
+        /* =============================================
+       HOMEPAGE HERO STYLES - AI Transformation
+       ============================================= */
+    
+    /* Hero Section - AI Transformation Showcase */
+    .hero-section {
+        background: linear-gradient(135deg, var(--captech-primary-dark) 0%, var(--captech-primary) 50%, var(--captech-primary-dark) 100%);
+        color: var(--captech-white);
+        padding: 80px 0 100px 0;
+        position: relative;
+        overflow: hidden;
+        min-height: 85vh;
+        display: flex;
+        align-items: center;
+    }
+    
+    .hero-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: 
+            radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+        pointer-events: none;
+    }
+    
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        padding-right: 2rem;
+    }
+    
+    .hero-title {
+        font-size: 3.5rem;
+        font-weight: 700;
+        line-height: 1.1;
+        margin-bottom: 1.5rem;
+        color: var(--captech-white);
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        letter-spacing: -0.02em;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.4rem;
+        font-weight: 400;
+        line-height: 1.4;
+        margin-bottom: 2rem;
+        color: rgba(255, 255, 255, 0.9);
+        max-width: 95%;
+    }
+        
+            .hero-cta-buttons {
+        display: flex;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+        margin-bottom: 2rem;
+        align-items: center;
+    }
+    
+    .btn-hero-primary {
+        background: linear-gradient(135deg, var(--captech-orange) 0%, #E6900A 100%);
+        border: none;
+        color: var(--captech-white);
+        padding: 20px 40px;
+        font-size: 1.2rem;
+        font-weight: 600;
+        border-radius: 8px;
+        transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 8px 24px rgba(254, 160, 2, 0.3);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        position: relative;
+        overflow: hidden;
+        letter-spacing: 0.02em;
+    }
+    
+    .btn-hero-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 32px rgba(254, 160, 2, 0.4);
+        color: var(--captech-white);
+        text-decoration: none;
+    }
+    
+    .btn-hero-secondary {
+        background: rgba(255, 255, 255, 0.15);
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        color: #FFFFFF;
+        padding: 16px 32px;
+        font-size: 1.125rem;
+        font-weight: 600;
+        border-radius: 12px;
+        transition: all 300ms ease;
+        backdrop-filter: blur(15px);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+    }
+    
+    .btn-hero-secondary:hover {
+        background: rgba(255, 255, 255, 0.25);
+        border-color: rgba(255, 255, 255, 0.6);
+        color: #FFFFFF;
+        transform: translateY(-2px);
+        text-decoration: none;
+        box-shadow: 0 6px 16px rgba(255, 255, 255, 0.1);
+    }
+        
+            /* Hero Visual - Better Alignment */
+    .hero-visual {
+        position: relative;
+        z-index: 2;
+        padding-left: 1rem;
+    }
+    
+    .demo-preview {
+        background: rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        padding: 2.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+    
+    .demo-preview::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+        pointer-events: none;
+    }
+    
+    .time-comparison {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2.5rem;
+        position: relative;
+        z-index: 2;
+        gap: 1rem;
+    }
+    
+    .time-box {
+        text-align: center;
+        flex: 1;
+        padding: 1rem;
+    }
+    
+    .time-label {
+        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 0.75rem;
+        font-weight: 500;
+    }
+    
+    .time-value {
+        font-size: 2.75rem;
+        font-weight: 700;
+        margin-bottom: 0.75rem;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .time-description {
+        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.9);
+        font-weight: 500;
+    }
+    
+    .vs-indicator {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #FEA002;
+        font-size: 1.75rem;
+        font-weight: 700;
+        padding: 0 0.5rem;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+        
+        /* Problem/Solution Section */
+        .problem-solution-section {
+            padding: 100px 0;
+            background: #F8F9FA;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: #212529;
+        }
+        
+        .section-subtitle {
+            font-size: 1.25rem;
+            text-align: center;
+            color: #6C757D;
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .problem-card, .solution-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            height: 100%;
+            transition: all 300ms ease;
+            border: 1px solid #E9ECEF;
+            position: relative;
+        }
+        
+        .problem-card {
+            border-left: 4px solid #DC3545;
+        }
+        
+        .solution-card {
+            border-left: 4px solid #28A745;
+        }
+        
+        .problem-card:hover, .solution-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+        
+        .problem-icon {
+            background: linear-gradient(135deg, #DC3545 0%, #C82333 100%);
+            color: white;
+        }
+        
+        .solution-icon {
+            background: linear-gradient(135deg, #28A745 0%, #20C997 100%);
+            color: white;
+        }
+        
+        .pain-points, .solution-points {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .pain-points li, .solution-points li {
+            padding: 1rem 0;
+            border-bottom: 1px solid #F8F9FA;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        
+        .pain-points li:last-child, .solution-points li:last-child {
+            border-bottom: none;
+        }
+        
+        .pain-points li i {
+            color: #DC3545;
+            margin-top: 0.25rem;
+        }
+        
+        .solution-points li i {
+            color: #28A745;
+            margin-top: 0.25rem;
+        }
+        
+        /* Features Grid */
+        .features-section {
+            padding: 100px 0;
+            background: white;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid #E9ECEF;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #0066CC08 0%, #004499 08 100%);
+            opacity: 0;
+            transition: opacity 300ms ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 0 25px 50px rgba(0, 102, 204, 0.15);
+            border-color: #0066CC;
+        }
+        
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #0066CC 0%, #004499 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem auto;
+            font-size: 2.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #212529;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .feature-description {
+            color: #6C757D;
+            line-height: 1.6;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* ROI Calculator Section */
+        .roi-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #F8F9FA 0%, #E9ECEF 100%);
+        }
+        
+        .calculator-card {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .calculator-inputs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .input-label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #495057;
+        }
+        
+        .form-control {
+            border: 2px solid #E9ECEF;
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-size: 1rem;
+            transition: border-color 300ms ease;
+        }
+        
+        .form-control:focus {
+            border-color: #0066CC;
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+            outline: none;
+        }
+        
+        .roi-results {
+            background: linear-gradient(135deg, #0066CC 0%, #004499 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            text-align: center;
+        }
+        
+        .roi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .roi-metric {
+            text-align: center;
+        }
+        
+        .roi-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .roi-label {
+            font-size: 0.875rem;
+            opacity: 0.9;
+        }
+        
+        /* Social Proof Section */
+        .social-proof-section {
+            padding: 100px 0;
+            background: white;
+        }
+        
+        .testimonial-carousel {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .testimonial-card {
+            background: #F8F9FA;
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            margin: 0 1rem;
+        }
+        
+        .testimonial-quote {
+            font-size: 1.5rem;
+            font-style: italic;
+            color: #495057;
+            margin-bottom: 2rem;
+            line-height: 1.4;
+        }
+        
+        .testimonial-author {
+            font-weight: 700;
+            color: #212529;
+            margin-bottom: 0.5rem;
+        }
+        
+        .testimonial-role {
+            color: #6C757D;
+            margin-bottom: 2rem;
+        }
+        
+        .testimonial-logo {
+            width: 120px;
+            height: 60px;
+            background: #E9ECEF;
+            border-radius: 8px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6C757D;
+            font-weight: 600;
+        }
+        
+        .metrics-bar {
+            background: #0066CC;
+            color: white;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+        
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .metric-label {
+            font-size: 0.875rem;
+            opacity: 0.9;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #212529 0%, #343A40 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .cta-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+        
+        .cta-option {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2.5rem;
+            transition: all 300ms ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .cta-option:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-8px);
+        }
+        
+        .cta-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #FEA002 0%, #FF8A00 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem auto;
+            font-size: 2rem;
+        }
+        
+        .cta-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-description {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .cta-button {
+            background: linear-gradient(135deg, #FEA002 0%, #FF8A00 100%);
+            border: none;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 300ms ease;
+            width: 100%;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(254, 160, 2, 0.3);
+            color: white;
+        }
+        
+        /* Container and Layout Improvements */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .hero-section .row {
+            align-items: center;
+            min-height: 80vh;
+        }
+        
+        .hero-section .col-lg-6:first-child {
+            padding-right: 3rem;
+        }
+        
+        /* Responsive Design - Enhanced */
+        @media (max-width: 1200px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .hero-section .col-lg-6:first-child {
+                padding-right: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .hero-section {
+                padding: 80px 0;
+                min-height: auto;
+            }
+            
+            .hero-section .col-lg-6:first-child {
+                padding-right: 0;
+                margin-bottom: 3rem;
+            }
+            
+            .hero-visual {
+                padding-left: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .hero-title {
+                font-size: 2.4rem;
+                line-height: 1.2;
+                margin-bottom: 1rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+                max-width: 100%;
+                margin-bottom: 1.5rem;
+            }
+            
+            .hero-cta-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .btn-hero-primary,
+            .btn-hero-secondary {
+                width: 100%;
+                justify-content: center;
+                padding: 16px 24px;
+                font-size: 1.1rem;
+            }
+            
+            .hero-metrics {
+                margin-top: 1.5rem !important;
+            }
+            
+            .hero-metrics > div {
+                flex-direction: column !important;
+                gap: 1rem !important;
+                text-align: center;
+            }
+            
+            .time-comparison {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .vs-indicator {
+                order: 2;
+                margin: 0.5rem 0;
+                transform: rotate(90deg);
+            }
+            
+            .time-value {
+                font-size: 2.25rem;
+            }
+            
+            .demo-preview {
+                padding: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .calculator-inputs {
+                grid-template-columns: 1fr;
+            }
+            
+            .roi-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .cta-options {
+                grid-template-columns: 1fr;
+            }
+            
+            /* Mobile-specific adjustments for new AI metrics grid */
+            .demo-preview > div[style*="grid-template-columns: repeat(2, 1fr)"] {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 0.75rem !important;
+            }
+        }
+        
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeIn 800ms ease-out forwards;
+        }
+        
+        .fade-in-delay-1 {
+            animation-delay: 200ms;
+        }
+        
+        .fade-in-delay-2 {
+            animation-delay: 400ms;
+        }
+        
+        .fade-in-delay-3 {
+            animation-delay: 600ms;
+        }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .counting-number {
+            transition: all 1s ease-out;
+        }
+        
+        /* AI Sparkle Effect */
+        .ai-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .ai-sparkle {
+            animation: sparkle 2s infinite;
+        }
+        
+                 @keyframes sparkle {
+             0%, 100% { opacity: 1; transform: scale(1); }
+             50% { opacity: 0.6; transform: scale(1.2); }
+         }
+</style>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="hero-content fade-in">
+                        <h1 class="hero-title">
+                            AI-Powered RCSA That 
+                            <span style="color: var(--captech-orange); text-shadow: 0 2px 4px rgba(254, 160, 2, 0.3);">Transforms</span> 
+                            Banking Risk Management
+                        </h1>
+                        <p class="hero-subtitle fade-in fade-in-delay-1">
+                            <strong>82% faster assessments.</strong> 95% AI accuracy. Real-time compliance insights. 
+                            Experience the future of regulatory risk management with intelligent automation.
+                        </p>
+                        <div class="hero-cta-buttons fade-in fade-in-delay-2">
+                            <a href="/wizAssessment" class="btn-hero-primary">
+                                <i class="bi bi-rocket-takeoff"></i>
+                                Experience Live Demo
+                            </a>
+                            <a href="#features-section" class="btn-hero-secondary">
+                                <i class="bi bi-graph-up-arrow"></i>
+                                See ROI Calculator
+                            </a>
+                        </div>
+                        <div class="hero-metrics fade-in fade-in-delay-3" style="margin-top: 2rem;">
+                            <div style="display: flex; gap: 2rem; flex-wrap: wrap; font-size: 0.9rem; color: rgba(255, 255, 255, 0.8);">
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <i class="bi bi-check-circle-fill" style="color: var(--captech-orange);"></i>
+                                    <span>45 min → 8.2 min assessments</span>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <i class="bi bi-check-circle-fill" style="color: var(--captech-orange);"></i>
+                                    <span>50+ banking controls database</span>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <i class="bi bi-check-circle-fill" style="color: var(--captech-orange);"></i>
+                                    <span>Real-time compliance tracking</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="hero-visual fade-in fade-in-delay-3">
+                        <div class="demo-preview">
+                            <div class="text-center mb-4">
+                                <h3 style="color: var(--captech-white); font-weight: 600; margin-bottom: 1rem;">
+                                    <i class="bi bi-cpu" style="color: var(--captech-orange);"></i>
+                                    AI Transformation Results
+                                </h3>
+                            </div>
+                            <div class="time-comparison">
+                                <div class="time-box">
+                                    <div class="time-label">Traditional RCSA</div>
+                                    <div class="time-value" style="color: #FF6B6B;">45min</div>
+                                    <div class="time-description">Manual, error-prone</div>
+                                </div>
+                                <div class="vs-indicator">
+                                    <i class="bi bi-arrow-right"></i>
+                                </div>
+                                <div class="time-box">
+                                    <div class="time-label">AI-Powered RCSA</div>
+                                    <div class="time-value" style="color: var(--captech-orange);">8.2min</div>
+                                    <div class="time-description">Intelligent, automated</div>
+                                </div>
+                            </div>
+                            
+                            <!-- AI Metrics Grid -->
+                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 2rem;">
+                                <div style="background: rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 1rem; text-align: center;">
+                                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--captech-orange);">95%</div>
+                                    <div style="font-size: 0.8rem; color: rgba(255, 255, 255, 0.8);">AI Accuracy</div>
+                                </div>
+                                <div style="background: rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 1rem; text-align: center;">
+                                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--captech-orange);">50+</div>
+                                    <div style="font-size: 0.8rem; color: rgba(255, 255, 255, 0.8);">Controls</div>
+                                </div>
+                                <div style="background: rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 1rem; text-align: center;">
+                                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--captech-orange);">82%</div>
+                                    <div style="font-size: 0.8rem; color: rgba(255, 255, 255, 0.8);">Time Saved</div>
+                                </div>
+                                <div style="background: rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 1rem; text-align: center;">
+                                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--captech-orange);">24/7</div>
+                                    <div style="font-size: 0.8rem; color: rgba(255, 255, 255, 0.8);">Monitoring</div>
+                                </div>
+                            </div>
+                            
+                            <div class="text-center" style="margin-top: 1.5rem;">
+                                <div style="background: rgba(255, 255, 255, 0.15); border-radius: 8px; padding: 1rem;">
+                                    <p class="mb-1" style="color: var(--captech-white); font-weight: 600;">
+                                        <i class="bi bi-play-circle" style="color: var(--captech-orange);"></i>
+                                        Interactive Demo Available
+                                    </p>
+                                    <p class="mb-0" style="color: rgba(255, 255, 255, 0.8); font-size: 0.85rem;">Complete workflow • No signup required • Real data</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem/Solution Section -->
+    <section class="problem-solution-section">
+        <div class="container">
+            <h2 class="section-title fade-in">Still Managing RCSA in Spreadsheets?</h2>
+            <p class="section-subtitle fade-in fade-in-delay-1">
+                Transform your regulatory compliance with AI-powered automation that eliminates manual errors and accelerates assessments
+            </p>
+            
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="problem-card fade-in fade-in-delay-2">
+                        <div class="card-icon problem-icon">
+                            <i class="bi bi-exclamation-triangle"></i>
+                        </div>
+                        <h3 class="h4 mb-3">Current RCSA Challenges</h3>
+                        <ul class="pain-points">
+                            <li>
+                                <i class="bi bi-clock"></i>
+                                <div>
+                                    <strong>Manual Assessment Burden</strong><br>
+                                    45+ minutes per RCSA, quarterly cycles
+                                </div>
+                            </li>
+                            <li>
+                                <i class="bi bi-bug"></i>
+                                <div>
+                                    <strong>Inconsistent Risk Scoring</strong><br>
+                                    Human bias, missed controls, audit findings
+                                </div>
+                            </li>
+                            <li>
+                                <i class="bi bi-eye-slash"></i>
+                                <div>
+                                    <strong>Limited Regulatory Intelligence</strong><br>
+                                    Static process, no predictive insights
+                                </div>
+                            </li>
+                            <li>
+                                <i class="bi bi-file-earmark-spreadsheet"></i>
+                                <div>
+                                    <strong>Spreadsheet Dependencies</strong><br>
+                                    Version control issues, no real-time tracking
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="solution-card fade-in fade-in-delay-3">
+                        <div class="card-icon solution-icon">
+                            <i class="bi bi-lightbulb"></i>
+                        </div>
+                        <h3 class="h4 mb-3">AI-Powered RCSA Solution</h3>
+                        <ul class="solution-points">
+                            <li>
+                                <i class="bi bi-lightning"></i>
+                                <div>
+                                    <strong>8.2-Minute Assessments</strong><br>
+                                    AI guides every step with 95% accuracy
+                                </div>
+                            </li>
+                            <li>
+                                <i class="bi bi-shield-check"></i>
+                                <div>
+                                    <strong>Smart Control Mapping</strong><br>
+                                    50+ banking controls, automated matching
+                                </div>
+                            </li>
+                            <li>
+                                <i class="bi bi-graph-up-arrow"></i>
+                                <div>
+                                    <strong>Real-Time Risk Intelligence</strong><br>
+                                    Predictive analytics, regulatory updates
+                                </div>
+                            </li>
+                            <li>
+                                <i class="bi bi-cpu"></i>
+                                <div>
+                                    <strong>Banking-Grade AI Platform</strong><br>
+                                    SOX compliant, audit-ready documentation
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section" id="features-section">
+        <div class="container">
+            <h2 class="section-title fade-in">Banking-Grade AI Features for RCSA Excellence</h2>
+            <p class="section-subtitle fade-in fade-in-delay-1">
+                Discover how intelligent automation transforms every step of your regulatory compliance workflow
+            </p>
+            
+            <div class="features-grid">
+                <div class="feature-card fade-in fade-in-delay-2">
+                    <div class="feature-icon">
+                        <i class="bi bi-robot"></i>
+                    </div>
+                    <h3 class="feature-title">
+                        AI Risk Identification
+                    </h3>
+                    <p class="feature-description">
+                        Intelligent risk suggestions based on process criticality, regulatory updates, and banking industry patterns with 95% accuracy
+                    </p>
+                </div>
+                
+                <div class="feature-card fade-in fade-in-delay-3">
+                    <div class="feature-icon">
+                        <i class="bi bi-shield-fill-check"></i>
+                    </div>
+                    <h3 class="feature-title">Intelligent Control Mapping</h3>
+                    <p class="feature-description">
+                        95% accurate control recommendations from comprehensive banking database: Wire Transfer, AML, Access Control, and 15+ categories
+                    </p>
+                </div>
+                
+                <div class="feature-card fade-in fade-in-delay-2">
+                    <div class="feature-icon">
+                        <i class="bi bi-award"></i>
+                    </div>
+                    <h3 class="feature-title">One-Click Compliance</h3>
+                    <p class="feature-description">
+                        Pre-mapped to regulations: Basel III, SOX, OCC with automated documentation
+                    </p>
+                </div>
+                
+                <div class="feature-card fade-in fade-in-delay-3">
+                    <div class="feature-icon">
+                        <i class="bi bi-speedometer2"></i>
+                    </div>
+                    <h3 class="feature-title">Real-Time Analytics</h3>
+                    <p class="feature-description">
+                        Board-ready insights generated in seconds, not days with executive dashboards
+                    </p>
+                </div>
+                
+                <div class="feature-card fade-in fade-in-delay-2">
+                    <div class="feature-icon">
+                        <i class="bi bi-radar"></i>
+                    </div>
+                    <h3 class="feature-title">
+                        <span class="ai-indicator">
+                            <span class="ai-sparkle">✨</span>
+                            Anomaly Detection
+                        </span>
+                    </h3>
+                    <p class="feature-description">
+                        AI flags unusual patterns before they become problems with predictive alerts
+                    </p>
+                </div>
+                
+                <div class="feature-card fade-in fade-in-delay-3">
+                    <div class="feature-icon">
+                        <i class="bi bi-bar-chart"></i>
+                    </div>
+                    <h3 class="feature-title">Peer Benchmarking</h3>
+                    <p class="feature-description">
+                        See how your risks compare to similar institutions with anonymized data
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROI Calculator Section -->
+    <section class="roi-section">
+        <div class="container">
+            <h2 class="section-title fade-in">Calculate Your RCSA Transformation ROI</h2>
+            <p class="section-subtitle fade-in fade-in-delay-1">
+                Quantify the time savings, cost reduction, and efficiency gains from AI-powered regulatory compliance
+            </p>
+            
+            <div class="calculator-card fade-in fade-in-delay-2">
+                <div class="calculator-inputs">
+                    <div class="input-group">
+                        <label class="input-label">Risk Assessments per Month</label>
+                        <input type="number" class="form-control" id="assessments" value="50" min="1" max="500">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Current Time per Assessment (hours)</label>
+                        <input type="number" class="form-control" id="currentTime" value="2.5" min="0.5" max="8" step="0.5">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Number of Risk Managers</label>
+                        <input type="number" class="form-control" id="managers" value="3" min="1" max="50">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Average Hourly Cost ($)</label>
+                        <input type="number" class="form-control" id="hourlyCost" value="125" min="50" max="500">
+                    </div>
+                </div>
+                
+                <div class="roi-results">
+                    <h4 class="mb-3">Your AI Transformation Results</h4>
+                    <div class="roi-grid">
+                        <div class="roi-metric">
+                            <div class="roi-value counting-number" id="hoursaved">2,400</div>
+                            <div class="roi-label">Hours Saved Annually</div>
+                        </div>
+                        <div class="roi-metric">
+                            <div class="roi-value counting-number" id="costsaved">$240,000</div>
+                            <div class="roi-label">Cost Savings</div>
+                        </div>
+                        <div class="roi-metric">
+                            <div class="roi-value counting-number" id="efficiency">82%</div>
+                            <div class="roi-label">Time Reduction</div>
+                        </div>
+                        <div class="roi-metric">
+                            <div class="roi-value counting-number" id="roipercent">2,400%</div>
+                            <div class="roi-label">Annual ROI</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof Section -->
+    <section class="social-proof-section">
+        <div class="container">
+            <h2 class="section-title fade-in">Trusted by Forward-Thinking Banks</h2>
+            <p class="section-subtitle fade-in fade-in-delay-1">
+                See how leading financial institutions are transforming their risk management
+            </p>
+            
+            <div class="testimonial-carousel fade-in fade-in-delay-2">
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">
+                        "The AI caught risks we didn't even know existed. We've reduced assessment time by 85% and our audit findings dropped to zero."
+                    </p>
+                    <div class="testimonial-author">Sarah Chen</div>
+                    <div class="testimonial-role">VP Risk Management, Regional Bank</div>
+                    <div class="testimonial-logo">Bank Logo</div>
+                </div>
+            </div>
+            
+            <div class="metrics-bar">
+                <div class="container">
+                    <div class="metrics-grid">
+                        <div>
+                            <div class="metric-value">8.2min</div>
+                            <div class="metric-label">Average Assessment Time</div>
+                        </div>
+                        <div>
+                            <div class="metric-value">95%</div>
+                            <div class="metric-label">AI Accuracy Rate</div>
+                        </div>
+                        <div>
+                            <div class="metric-value">3x</div>
+                            <div class="metric-label">More Risks Identified</div>
+                        </div>
+                        <div>
+                            <div class="metric-value">82%</div>
+                            <div class="metric-label">Time Reduction</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call-to-Action Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="section-title fade-in" style="color: white;">Ready to Transform Your RCSA Process?</h2>
+            <p class="section-subtitle fade-in fade-in-delay-1" style="color: rgba(255,255,255,0.8);">
+                Experience the future of regulatory compliance with our AI-powered demonstration
+            </p>
+            
+            <div class="cta-options">
+                <div class="cta-option fade-in fade-in-delay-2">
+                    <div class="cta-icon">
+                        <i class="bi bi-calendar-check"></i>
+                    </div>
+                    <h3 class="cta-title">Schedule Expert Demo</h3>
+                    <p class="cta-description">
+                        See a personalized RCSA transformation demo with our banking risk experts. 30 minutes to AI transformation.
+                    </p>
+                    <button class="cta-button" onclick="window.open('mailto:demo@captech.com?subject=RCSA AI Demo Request', '_blank')">
+                        Book Expert Demo
+                    </button>
+                </div>
+                
+                <div class="cta-option fade-in fade-in-delay-3">
+                    <div class="cta-icon">
+                        <i class="bi bi-rocket-takeoff"></i>
+                    </div>
+                    <h3 class="cta-title">Experience Live Demo</h3>
+                    <p class="cta-description">
+                        Complete 7-step AI-powered RCSA workflow with real banking data. No signup required - start immediately.
+                    </p>
+                    <a href="/wizAssessment" class="cta-button" style="text-decoration: none;">
+                        Launch Live Demo
+                    </a>
+                </div>
+                
+                <div class="cta-option fade-in fade-in-delay-2">
+                    <div class="cta-icon">
+                        <i class="bi bi-file-earmark-pdf"></i>
+                    </div>
+                    <h3 class="cta-title">Download RCSA Guide</h3>
+                    <p class="cta-description">
+                        "CRO's Guide to AI in RCSA" with ROI calculator, implementation roadmap, and banking compliance framework.
+                    </p>
+                    <button class="cta-button" onclick="downloadGuide()">
+                        Get Implementation Guide
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // =====================================================
+        // HOMEPAGE INTERACTIVE FUNCTIONALITY
+        // =====================================================
+        
+        // ROI Calculator
+        function updateROICalculation() {
+            const assessments = parseInt(document.getElementById('assessments').value) || 50;
+            const currentTime = parseFloat(document.getElementById('currentTime').value) || 2.5;
+            const managers = parseInt(document.getElementById('managers').value) || 3;
+            const hourlyCost = parseInt(document.getElementById('hourlyCost').value) || 125;
+            
+            // AI reduces time by 82% (from requirements)
+            const timeReduction = 0.82;
+            const newTime = currentTime * (1 - timeReduction);
+            
+            // Annual calculations
+            const annualAssessments = assessments * 12;
+            const timeSavedPerAssessment = currentTime - newTime;
+            const totalHoursSaved = annualAssessments * timeSavedPerAssessment;
+            const totalCostSaved = totalHoursSaved * hourlyCost;
+            
+            // Platform cost estimate (from requirements)
+            const platformCost = managers * 2400; // $2400 per user annually
+            const netSavings = totalCostSaved - platformCost;
+            const roiPercent = Math.round((netSavings / platformCost) * 100);
+            
+            // Update display with animation
+            animateNumber('hoursaved', Math.round(totalHoursSaved));
+            animateNumber('costsaved', '$' + totalCostSaved.toLocaleString());
+            animateNumber('efficiency', Math.round(timeReduction * 100) + '%');
+            animateNumber('roipercent', roiPercent + '%');
+        }
+        
+        function animateNumber(elementId, finalValue) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            
+            element.textContent = finalValue;
+            element.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                element.style.transform = 'scale(1)';
+            }, 200);
+        }
+        
+        // Event listeners for ROI calculator
+        document.addEventListener('DOMContentLoaded', function() {
+            const calculatorInputs = ['assessments', 'currentTime', 'managers', 'hourlyCost'];
+            calculatorInputs.forEach(inputId => {
+                const input = document.getElementById(inputId);
+                if (input) {
+                    input.addEventListener('input', updateROICalculation);
+                }
+            });
+            
+            // Initial calculation
+            updateROICalculation();
+            
+            // Intersection Observer for fade-in animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe all fade-in elements
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+        });
+        
+        // Download RCSA guide function
+        function downloadGuide() {
+            // Simulate comprehensive RCSA guide download
+            const link = document.createElement('a');
+            link.href = 'data:text/plain;charset=utf-8,CRO Guide to AI in RCSA%0A%0AComprehensive guide covering:%0A%0A1. AI Transformation in RCSA%0A   - 82%25 time reduction strategies%0A   - 95%25 accuracy improvement methods%0A   - Banking-specific implementation%0A%0A2. ROI Calculation Framework%0A   - Time savings quantification%0A   - Cost reduction analysis%0A   - Quality improvement metrics%0A%0A3. Implementation Roadmap%0A   - Phase 1: Process Assessment%0A   - Phase 2: AI Integration%0A   - Phase 3: Full Automation%0A%0A4. Banking Compliance Framework%0A   - SOX compliance considerations%0A   - Regulatory reporting automation%0A   - Audit trail management%0A%0A5. Control Mapping Database%0A   - 50+ banking controls%0A   - Wire Transfer, AML, Access Control%0A   - Automated effectiveness scoring%0A%0AFor the complete interactive demo:%0Ahttps://rcsa-demo.powerappsportals.com/wizAssessment';
+            link.download = 'CRO-Guide-AI-RCSA-Implementation.txt';
+            link.click();
+            
+            // Show success message
+            alert('RCSA Implementation Guide download started! This comprehensive guide includes ROI calculators, implementation roadmaps, and the link to our interactive demo.');
+        }
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Add sparkle animation on scroll
+        function addSparkleEffect() {
+            document.querySelectorAll('.ai-sparkle').forEach(sparkle => {
+                const delay = Math.random() * 2000;
+                setTimeout(() => {
+                    sparkle.style.animation = 'sparkle 2s infinite';
+                }, delay);
+            });
+        }
+        
+        // Initialize sparkle effects
+        document.addEventListener('DOMContentLoaded', addSparkleEffect);
+        
+        // Analytics tracking (placeholder)
+        function trackEvent(eventName, properties = {}) {
+            console.log('Analytics Event:', eventName, properties);
+            // In production, this would integrate with your analytics platform
+        }
+        
+        // Track CTA clicks
+        document.querySelectorAll('.btn-hero-primary, .btn-hero-secondary, .cta-button').forEach(button => {
+            button.addEventListener('click', function() {
+                trackEvent('CTA_Click', {
+                    button_text: this.textContent.trim(),
+                    section: this.closest('section')?.className || 'unknown'
+                });
+            });
+        });
+    </script>

@@ -1,0 +1,380 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rcsa-demo.captech.com/schemas/wizard.schema.json",
+  "title": "WizAssessment Data Contract",
+  "description": "Schema for the assessment wizard dictionaries, controls, and AI guidance mocks.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "process",
+    "risks",
+    "controls",
+    "insights",
+    "responseLibrary",
+    "exportTemplates"
+  ],
+  "properties": {
+    "version": {
+      "type": "string",
+      "pattern": "^v\\d+\\.\\d+(\\.\\d+)?$"
+    },
+    "process": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "defaultName",
+        "stepCount",
+        "modes"
+      ],
+      "properties": {
+        "defaultName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "stepCount": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "modes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "label",
+              "description"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9-]+$"
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1
+              },
+              "description": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "risks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "title",
+          "category",
+          "description",
+          "defaultLikelihood",
+          "defaultImpact"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+$"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "category": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          },
+          "defaultLikelihood": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5
+          },
+          "defaultImpact": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "aiSummary": {
+            "type": "string"
+          },
+          "controlsSuggested": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "residualTarget": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 25
+          }
+        }
+      }
+    },
+    "controls": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "title",
+          "type",
+          "description"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+$"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "preventive",
+              "detective",
+              "corrective"
+            ]
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          },
+          "linkedRisks": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "effectivenessRange": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "min",
+              "max"
+            ],
+            "properties": {
+              "min": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5
+              },
+              "max": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5
+              }
+            }
+          }
+        }
+      }
+    },
+    "insights": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "aiHighlights",
+        "badgeThresholds"
+      ],
+      "properties": {
+        "aiHighlights": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "riskId",
+              "message",
+              "nextBestAction"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9-]+$"
+              },
+              "riskId": {
+                "type": "string",
+                "pattern": "^[a-z0-9-]+$"
+              },
+              "message": {
+                "type": "string",
+                "minLength": 1
+              },
+              "nextBestAction": {
+                "type": "string",
+                "minLength": 1
+              },
+              "confidence": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            }
+          }
+        },
+        "badgeThresholds": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "controlCoverage": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "riskReduction": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "issueClosureRate": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            }
+          }
+        }
+      }
+    },
+    "responseLibrary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "strategies",
+        "actionItems"
+      ],
+      "properties": {
+        "strategies": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "title",
+              "description"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9-]+$"
+              },
+              "title": {
+                "type": "string",
+                "minLength": 1
+              },
+              "description": {
+                "type": "string",
+                "minLength": 1
+              },
+              "linkedRisks": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "actionItems": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "title",
+              "ownerRole"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9-]+$"
+              },
+              "title": {
+                "type": "string",
+                "minLength": 1
+              },
+              "ownerRole": {
+                "type": "string",
+                "minLength": 1
+              },
+              "dueInDays": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "linkedRiskId": {
+                "type": "string"
+              },
+              "recommendedControls": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "exportTemplates": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "summary",
+        "dataPoints"
+      ],
+      "properties": {
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dataPoints": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "label",
+              "valuePath"
+            ],
+            "properties": {
+              "label": {
+                "type": "string",
+                "minLength": 1
+              },
+              "valuePath": {
+                "type": "string",
+                "minLength": 1
+              },
+              "format": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

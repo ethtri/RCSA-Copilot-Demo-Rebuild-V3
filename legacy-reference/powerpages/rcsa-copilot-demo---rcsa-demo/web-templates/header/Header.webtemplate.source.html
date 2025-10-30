@@ -1,0 +1,191 @@
+{% assign defaultlang = settings['LanguageLocale/Code'] | default: 'en-us' %}
+{% assign homeurl = website.adx_partialurl %}
+{% assign current_path = request.path | downcase | default: '/' %}
+{% if current_path == '' %}
+  {% assign current_path = '/' %}
+{% endif %}
+
+{% assign home_active = current_path == '/' or current_path == '/home' %}
+{% assign dashboard_active = current_path == '/scrdashboard_1lod' %}
+{% assign wizard_active = current_path == '/wizassessment' %}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" />
+<link rel="stylesheet" href="~/rcsa-styles.css?v=20251030" id="rcsa-design-system-css" onerror="this.onerror=null;this.href='~/design-system/rcsa-styles.css?v=20251030';" />
+
+<style>
+.rcsa-header {
+  background: linear-gradient(135deg, #004499 0%, #0066CC 50%, #004499 100%) !important;
+  border-bottom: 3px solid #FEA002 !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2) !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  height: 80px !important;
+  z-index: 1040 !important;
+  backdrop-filter: blur(10px) !important;
+  padding: 0 1.5rem !important;
+}
+
+.rcsa-navbar-brand {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.75rem !important;
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+  color: #FFFFFF !important;
+  text-decoration: none !important;
+}
+
+.rcsa-navbar-brand:hover,
+.rcsa-navbar-brand:focus {
+  color: #FFFFFF !important;
+  text-decoration: none !important;
+}
+
+.rcsa-logo {
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 8px !important;
+  background: #FEA002 !important;
+  color: #FFFFFF !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-weight: 700 !important;
+  font-size: 1.1rem !important;
+}
+
+.rcsa-nav-link {
+  color: rgba(255, 255, 255, 0.85) !important;
+  font-weight: 500 !important;
+  padding: 0.35rem 0.95rem !important;
+  border-radius: 8px !important;
+  transition: all 180ms ease-in-out !important;
+}
+
+.rcsa-nav-link:hover,
+.rcsa-nav-link:focus {
+  color: #FFFFFF !important;
+  background: rgba(255, 255, 255, 0.12) !important;
+  text-decoration: none !important;
+}
+
+.rcsa-nav-link.active {
+  color: #FFFFFF !important;
+  background: rgba(255, 255, 255, 0.22) !important;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15) !important;
+}
+
+.rcsa-cta-button {
+  background: linear-gradient(135deg, #FEA002 0%, #E6900A 100%) !important;
+  border: none !important;
+  border-radius: 10px !important;
+  color: #FFFFFF !important;
+  font-weight: 600 !important;
+  padding: 0.45rem 1rem !important;
+  margin-left: 0.5rem !important;
+  transition: all 180ms ease-in-out !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+}
+
+.rcsa-cta-button:hover {
+  color: #FFFFFF !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 10px 20px rgba(254, 160, 2, 0.35) !important;
+}
+
+.rcsa-header .navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.35) !important;
+}
+
+.rcsa-header .navbar-toggler-icon {
+  filter: brightness(200%) !important;
+}
+
+@media (max-width: 1199.98px) {
+  .rcsa-header {
+    height: auto !important;
+    padding: 0.75rem 1.25rem !important;
+  }
+
+  body {
+    padding-top: 96px !important;
+  }
+
+  .rcsa-nav-link {
+    padding: 0.5rem 0.75rem !important;
+    margin: 0.25rem 0 !important;
+  }
+}
+</style>
+
+<nav class="navbar navbar-expand-xl navbar-dark rcsa-header" role="banner">
+  <div class="skip-to-content">
+    <a href="#mainContent">{{ resx.Skip_To_Content | default: "Skip to main content" }}</a>
+  </div>
+  <div class="container-fluid px-0">
+    <a class="navbar-brand rcsa-navbar-brand" href="~/">
+      <span class="rcsa-logo">AI</span>
+      <span>RCSA Copilot</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#rcsaPrimaryNav" aria-controls="rcsaPrimaryNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="rcsaPrimaryNav">
+      <ul class="navbar-nav align-items-center mb-2 mb-xl-0">
+        <li class="nav-item">
+          <a class="nav-link rcsa-nav-link {% if home_active %}active{% endif %}" href="/">
+            Home
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link rcsa-nav-link {% if dashboard_active %}active{% endif %}" href="/scrDashboard_1LOD">
+            1LoD Dashboard
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link rcsa-nav-link {% if wizard_active %}active{% endif %}" href="/wizassessment">
+            Assessment Workflow
+          </a>
+        </li>
+        <li class="nav-item ms-xl-2">
+          <a class="rcsa-cta-button" href="/wizassessment">
+            <i class="bi bi-magic"></i> Start Guided Demo
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+{% substitution %}
+{% assign current_page = page.id %}
+{% assign sr_page = sitemarkers["Search"].id %}
+{% assign forum_page = sitemarkers["Forums"].id %}
+{% if current_page %}
+  {% if current_page == sr_page or current_page == forum_page %}
+    {% assign section_class = "section-landing-search" %}
+    {% if current_page == forum_page %}
+      {% assign section_class = "section-landing-forums" %}
+    {% endif %}
+<section class="page_section {{ section_class | h }} color-inverse">
+    <div class="row sectionBlockLayout sectionFixedStyle" style="display: flex; flex-wrap: wrap; text-align: center;">
+        <div class="container" style="display: flex; flex-wrap: wrap;">
+            <div class="col-lg-12 columnBlockLayout" style="display: flex; flex-direction: column; justify-content: center;">
+                {% if current_page == sr_page %}
+                <h1 id="mainContent">{% editable snippets 'Search/Title' default: resx["Discover_Contoso"] %}</h1>
+                {% include 'Search' search_id:'search_control' %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endif %}
+{% endsubstitution %}

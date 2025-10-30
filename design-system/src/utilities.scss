@@ -1,0 +1,59 @@
+@use "sass:list";
+@use "sass:map";
+@use "sass:meta";
+@use "./tokens.generated" as tokens;
+
+$spacing-scale: map.get(tokens.$spacing-tokens, "scale");
+$color-groups: map.remove(tokens.$colors-tokens, "legacy-aliases");
+$z-index-map: map.get(tokens.$layout-tokens, "z-index");
+$radius-map: map.get(tokens.$layout-tokens, "radius");
+
+// Generate spacing helpers (all directions + axis-specific).
+@mixin emit-spacing-utility($class-prefix, $properties) {
+  @each $scale, $value in $spacing-scale {
+    .u-#{$class-prefix}-#{$scale} {
+      @each $property in $properties {
+        #{$property}: var(--rcsa-spacing-scale-#{$scale}) !important;
+      }
+    }
+  }
+}
+
+@include emit-spacing-utility("m", ("margin"));
+@include emit-spacing-utility("mt", ("margin-top"));
+@include emit-spacing-utility("mb", ("margin-bottom"));
+@include emit-spacing-utility("p", ("padding"));
+@include emit-spacing-utility("px", ("padding-left", "padding-right"));
+@include emit-spacing-utility("py", ("padding-top", "padding-bottom"));
+@include emit-spacing-utility("gap", ("gap"));
+
+// Text/background color helpers for downstream prototypes.
+@each $group, $values in $color-groups {
+  @if meta.type-of($values) == "map" {
+    @each $token, $value in $values {
+      $token-name: "" + $token;
+
+      .u-text-#{$token-name} {
+        color: var(--rcsa-color-#{$group}-#{$token}) !important;
+      }
+
+      .u-bg-#{$token-name} {
+        background-color: var(--rcsa-color-#{$group}-#{$token}) !important;
+      }
+    }
+  }
+}
+
+// Layout helpers for stacking contexts.
+@each $token, $value in $z-index-map {
+  .u-z-#{$token} {
+    z-index: var(--rcsa-layout-z-index-#{$token}) !important;
+  }
+}
+
+// Border radius helpers.
+@each $token, $value in $radius-map {
+  .u-radius-#{$token} {
+    border-radius: var(--rcsa-layout-radius-#{$token}) !important;
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "rcsa-demo-v7",
+  "version": "1.0.0",
+  "description": "Sprint 1 workspace tooling and contracts for the RCSA Copilot demo rebuild.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:design-system": "node tools/build-design-system.mjs",
+    "test:data-contracts": "node tools/validate-data-contracts.js"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "sass": "^1.80.0"
+  }
+}

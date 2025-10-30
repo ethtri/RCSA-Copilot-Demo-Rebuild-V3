@@ -1,0 +1,29 @@
+{
+  "brand": {
+    "captech-primary": "#FEA002",
+    "captech-primary-light": "#FFB347",
+    "captech-primary-dark": "#E6900A"
+  },
+  "status": {
+    "success": "#28A745",
+    "warning": "#FFC107",
+    "danger": "#DC3545",
+    "info": "#17A2B8"
+  },
+  "neutrals": {
+    "gray-50": "#F8F9FA",
+    "gray-100": "#E9ECEF",
+    "gray-200": "#DEE2E6",
+    "gray-300": "#CED4DA",
+    "gray-400": "#6C757D",
+    "gray-500": "#495057",
+    "gray-600": "#343A40",
+    "gray-700": "#212529",
+    "white": "#FFFFFF"
+  },
+  "legacy-aliases": {
+    "fcb-primary": "#FEA002",
+    "fcb-primary-light": "#FFB347",
+    "fcb-primary-dark": "#E6900A"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "grid": {
+    "container-max-width": "1200px",
+    "container-padding-x": "1rem",
+    "column-fractions": {
+      "1": "8.333333%",
+      "2": "16.666667%",
+      "3": "25%",
+      "4": "33.333333%",
+      "6": "50%",
+      "8": "66.666667%",
+      "9": "75%",
+      "12": "100%"
+    }
+  },
+  "radius": {
+    "sm": "0.25rem",
+    "md": "0.375rem",
+    "lg": "0.5rem",
+    "xl": "0.75rem"
+  },
+  "z-index": {
+    "header": 1040,
+    "modal": 1055,
+    "modal-backdrop": 1050,
+    "tooltip": 1070,
+    "popover": 1070
+  }
+}

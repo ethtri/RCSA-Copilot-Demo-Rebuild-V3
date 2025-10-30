@@ -1,0 +1,36 @@
+{
+  "version": "v1.0.0",
+  "source": "legacy-reference/powerpages/rcsa-copilot-demo---rcsa-demo/web-pages/home/Home.webpage.copy.html:1221",
+  "updatedAt": "2025-10-30T17:30:00Z",
+  "defaults": {
+    "assessmentsPerMonth": 50,
+    "baselineHoursPerAssessment": 2.5,
+    "managers": 3,
+    "hourlyCost": 125
+  },
+  "multipliers": {
+    "timeReduction": 0.82,
+    "platformCostPerManager": 2400,
+    "assessmentToYearMultiplier": 12
+  },
+  "copy": {
+    "headline": "Calculate Your Risk Management ROI",
+    "subheader": "See exactly how much time and money AI-powered RCSA can save your organization.",
+    "cta": "Get Free Guide",
+    "disclaimer": "Estimates leverage legacy ROI defaults; tune for your institution before executive distribution."
+  },
+  "formatting": {
+    "currency": "USD",
+    "numberLocale": "en-US",
+    "valueLabels": {
+      "annualHoursSaved": "Annual Hours Saved",
+      "annualCostSaved": "Annual Cost Savings",
+      "efficiencyGain": "Efficiency Gain",
+      "roiPercent": "Projected ROI"
+    }
+  },
+  "thresholds": {
+    "maxManagers": 12,
+    "maxAssessmentsPerMonth": 250
+  }
+}

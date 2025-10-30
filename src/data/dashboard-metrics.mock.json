@@ -1,0 +1,174 @@
+{
+  "version": "v1.0.0",
+  "updatedAt": "2025-10-30T17:35:00Z",
+  "summary": {
+    "reportingWindow": "Q3 FY25",
+    "refreshFrequency": "Daily 06:00 ET",
+    "dataMode": "mock"
+  },
+  "kpis": [
+    {
+      "id": "residual-risk-reduction",
+      "label": "Residual Risk Reduction",
+      "value": 37,
+      "unit": "percent",
+      "trend": {
+        "direction": "up",
+        "percentage": 5.2
+      },
+      "target": 35,
+      "changeNarrative": "AI-assisted testing reduced open findings across high-impact products."
+    },
+    {
+      "id": "issues-closed",
+      "label": "Issues Closed",
+      "value": 18,
+      "unit": "count",
+      "trend": {
+        "direction": "up",
+        "percentage": 12.0
+      },
+      "target": 15,
+      "changeNarrative": "Expedited remediation playbooks within wire transfer operations."
+    },
+    {
+      "id": "controls-mapped",
+      "label": "Controls Mapped",
+      "value": 42,
+      "unit": "count",
+      "trend": {
+        "direction": "up",
+        "percentage": 3.5
+      },
+      "target": 45,
+      "changeNarrative": "Control rationalization backlog trimmed after wizard uplift."
+    },
+    {
+      "id": "assessment-cycle-time",
+      "label": "Assessment Cycle Time",
+      "value": 8.4,
+      "unit": "days",
+      "trend": {
+        "direction": "down",
+        "percentage": -9.1
+      },
+      "target": 7.5,
+      "changeNarrative": "Home page ROI workflow continues to shift prep to AI automation."
+    }
+  ],
+  "trendSeries": [
+    {
+      "id": "risk-heatmap",
+      "title": "Weekly Residual Risk Score",
+      "description": "Tracks blended residual score for the top five wire transfer risks.",
+      "series": [
+        {
+          "name": "Residual Score",
+          "values": [
+            { "date": "2025-09-01", "value": 18 },
+            { "date": "2025-09-08", "value": 17 },
+            { "date": "2025-09-15", "value": 17 },
+            { "date": "2025-09-22", "value": 16 },
+            { "date": "2025-09-29", "value": 15 }
+          ],
+          "target": 14
+        }
+      ]
+    },
+    {
+      "id": "issue-burn-down",
+      "title": "Open Issue Burn Down",
+      "description": "Shows closure velocity across open SOX & operational issues.",
+      "series": [
+        {
+          "name": "Open Issues",
+          "values": [
+            { "date": "2025-09-01", "value": 26 },
+            { "date": "2025-09-08", "value": 24 },
+            { "date": "2025-09-15", "value": 22 },
+            { "date": "2025-09-22", "value": 20 },
+            { "date": "2025-09-29", "value": 18 }
+          ],
+          "target": 15
+        }
+      ]
+    },
+    {
+      "id": "control-effectiveness",
+      "title": "Control Effectiveness Score",
+      "description": "Effectiveness average across mapped controls per sprint.",
+      "series": [
+        {
+          "name": "Effectiveness",
+          "values": [
+            { "date": "2025-09-01", "value": 82 },
+            { "date": "2025-09-08", "value": 84 },
+            { "date": "2025-09-15", "value": 86 },
+            { "date": "2025-09-22", "value": 85 },
+            { "date": "2025-09-29", "value": 87 }
+          ],
+          "target": 90
+        }
+      ]
+    }
+  ],
+  "alerts": [
+    {
+      "id": "high-residual-wire-transfer",
+      "severity": "high",
+      "title": "Residual risk above threshold for Wire Transfer",
+      "message": "Residual score of 15 exceeds target of 12. Review coverage allocations for deepfake and fraud scenarios.",
+      "cta": {
+        "label": "View Assessment",
+        "href": "/wizassessment?risk=unauthorized-transfer"
+      }
+    },
+    {
+      "id": "scenario-sla-warning",
+      "severity": "medium",
+      "title": "Scenario testing SLA approaching deadline",
+      "message": "Next quarterly scenario rehearsal due in 4 days for Cross-Border Payments.",
+      "cta": {
+        "label": "Schedule Session",
+        "href": "/tasks/schedule-scenario"
+      }
+    }
+  ],
+  "actionQueue": {
+    "owner": "First Line Risk Office",
+    "items": [
+      {
+        "id": "action-enhance-monitoring",
+        "title": "Deploy AI monitoring for deepfake requests",
+        "status": "in-progress",
+        "dueDate": "2025-10-15",
+        "owner": "Fraud Analytics Lead",
+        "linkedRiskId": "deepfake-voice",
+        "tags": ["fraud", "automation"]
+      },
+      {
+        "id": "action-policy-update",
+        "title": "Finalize wire reversal escalation policy",
+        "status": "not-started",
+        "dueDate": "2025-10-22",
+        "owner": "Wire Operations",
+        "linkedRiskId": "realtime-reversal",
+        "tags": ["policy"]
+      },
+      {
+        "id": "action-control-test",
+        "title": "Validate detective control coverage for transfer anomalies",
+        "status": "blocked",
+        "dueDate": "2025-10-05",
+        "owner": "Controls Assurance",
+        "linkedRiskId": "fraud-detection",
+        "tags": ["testing", "controls"]
+      }
+    ]
+  },
+  "dataQuality": {
+    "completeness": 96,
+    "lagDays": 1,
+    "notes": "Mock payload seeded from legacy dashboard defaults; replace once Dataverse feed lands."
+  }
+}

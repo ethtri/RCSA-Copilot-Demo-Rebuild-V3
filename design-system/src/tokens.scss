@@ -1,0 +1,24 @@
+@use "sass:map";
+@use "sass:meta";
+@use "./tokens.generated" as tokens;
+
+// Recursively flatten token maps into CSS custom properties.
+@mixin emit-token-properties($token-map, $prefix) {
+  @each $key, $value in $token-map {
+    $token-name: if($prefix == "", $key, "#{$prefix}-#{$key}");
+
+    @if meta.type-of($value) == "map" {
+      @include emit-token-properties($value, $token-name);
+    } @else {
+      --rcsa-#{$token-name}: #{$value};
+    }
+  }
+}
+
+:root {
+  @include emit-token-properties(tokens.$colors-tokens, "color");
+  @include emit-token-properties(tokens.$layout-tokens, "layout");
+  @include emit-token-properties(tokens.$spacing-tokens, "spacing");
+  @include emit-token-properties(tokens.$typography-tokens, "typography");
+  @include emit-token-properties(tokens.$effects-tokens, "effects");
+}

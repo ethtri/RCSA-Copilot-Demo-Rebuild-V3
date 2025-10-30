@@ -1,0 +1,222 @@
+{
+  "version": "v1.0.0",
+  "process": {
+    "defaultName": "Wire Transfer Assessment",
+    "stepCount": 7,
+    "modes": [
+      {
+        "id": "guided",
+        "label": "Guided Assessment",
+        "description": "Full wizard experience with AI insights enabled."
+      },
+      {
+        "id": "rapid",
+        "label": "Rapid Refresh",
+        "description": "Abbreviated workflow for monthly touchpoints."
+      }
+    ]
+  },
+  "risks": [
+    {
+      "id": "unauthorized-transfer",
+      "title": "Unauthorized Wire Transfer",
+      "category": "Fraud Risk",
+      "description": "External actors submit fraudulent wire requests through call centers or compromised credentials.",
+      "defaultLikelihood": 4,
+      "defaultImpact": 5,
+      "tags": ["fraud", "payments"],
+      "aiSummary": "Pattern drift detected in dual-approval sequences; recommend strengthening detective analytics.",
+      "controlsSuggested": ["dual-authentication", "call-back-protocol"],
+      "residualTarget": 12
+    },
+    {
+      "id": "deepfake-voice",
+      "title": "Deepfake Voice Authorization",
+      "category": "Technology Risk",
+      "description": "Synthetic voice attempts bypass verbal authentication steps during wire callbacks.",
+      "defaultLikelihood": 3,
+      "defaultImpact": 4,
+      "tags": ["ai", "fraud"],
+      "aiSummary": "AI voiceprints show elevated match variance; deploy challenge-response scripts.",
+      "controlsSuggested": ["call-back-protocol", "agent-training"],
+      "residualTarget": 10
+    },
+    {
+      "id": "realtime-reversal",
+      "title": "Real-time Payment Reversal Risk",
+      "category": "Compliance Risk",
+      "description": "Insufficient reversal windows for real-time rails increase loss exposure.",
+      "defaultLikelihood": 2,
+      "defaultImpact": 5,
+      "tags": ["operations", "policy"],
+      "aiSummary": "Average reversal time exceeds policy by 18 minutes; tighten escalation triggers.",
+      "controlsSuggested": ["reversal-escalation", "real-time-monitoring"],
+      "residualTarget": 9
+    },
+    {
+      "id": "fraud-detection",
+      "title": "Fraud Detection Failure",
+      "category": "Technology Risk",
+      "description": "Scenario coverage gaps reduce anomaly detection reliability for wire activity.",
+      "defaultLikelihood": 3,
+      "defaultImpact": 5,
+      "tags": ["automation", "analytics"],
+      "aiSummary": "Scenario library coverage at 74%; expand AI models to include cross-border typologies.",
+      "controlsSuggested": ["real-time-monitoring", "model-validation"],
+      "residualTarget": 11
+    }
+  ],
+  "controls": [
+    {
+      "id": "dual-authentication",
+      "title": "Dual Authentication Control",
+      "type": "preventive",
+      "description": "Requires two independent approvals for all high-value wire transfers.",
+      "linkedRisks": ["unauthorized-transfer"],
+      "effectivenessRange": { "min": 3, "max": 5 }
+    },
+    {
+      "id": "call-back-protocol",
+      "title": "Out-of-Band Call Back",
+      "type": "detective",
+      "description": "Performs voice callback verification using pre-registered contacts.",
+      "linkedRisks": ["unauthorized-transfer", "deepfake-voice"],
+      "effectivenessRange": { "min": 2, "max": 4 }
+    },
+    {
+      "id": "reversal-escalation",
+      "title": "Reversal Escalation Runbook",
+      "type": "corrective",
+      "description": "Escalates real-time payment reversals within defined SLA windows.",
+      "linkedRisks": ["realtime-reversal"],
+      "effectivenessRange": { "min": 3, "max": 4 }
+    },
+    {
+      "id": "real-time-monitoring",
+      "title": "Real-time Wire Monitoring",
+      "type": "detective",
+      "description": "Machine learning analytics identify anomalous wire requests in-flight.",
+      "linkedRisks": ["realtime-reversal", "fraud-detection"],
+      "effectivenessRange": { "min": 3, "max": 5 }
+    },
+    {
+      "id": "agent-training",
+      "title": "Agent Deepfake Playbook",
+      "type": "preventive",
+      "description": "Coaches frontline staff on deepfake red flags and challenge questions.",
+      "linkedRisks": ["deepfake-voice"],
+      "effectivenessRange": { "min": 2, "max": 4 }
+    },
+    {
+      "id": "model-validation",
+      "title": "Model Validation Program",
+      "type": "detective",
+      "description": "Quarterly validation of AI detection models against new typologies.",
+      "linkedRisks": ["fraud-detection"],
+      "effectivenessRange": { "min": 3, "max": 5 }
+    }
+  ],
+  "insights": {
+    "aiHighlights": [
+      {
+        "id": "highlight-wire-transfer",
+        "riskId": "unauthorized-transfer",
+        "message": "Residual risk remains high because detective coverage lags industry peers by 2 controls.",
+        "nextBestAction": "Map call-back-protocol control to all high-value products.",
+        "confidence": 0.78
+      },
+      {
+        "id": "highlight-deepfake",
+        "riskId": "deepfake-voice",
+        "message": "Voice biometric drift detected; challenge-response compliance dropped to 82%.",
+        "nextBestAction": "Roll out agent-training refresher with new trigger phrases.",
+        "confidence": 0.72
+      },
+      {
+        "id": "highlight-reversal",
+        "riskId": "realtime-reversal",
+        "message": "Escalation SLA variance exceeds policy by 14 minutes.",
+        "nextBestAction": "Implement reversal-escalation automation in the next sprint.",
+        "confidence": 0.65
+      }
+    ],
+    "badgeThresholds": {
+      "controlCoverage": 80,
+      "riskReduction": 60,
+      "issueClosureRate": 75
+    }
+  },
+  "responseLibrary": {
+    "strategies": [
+      {
+        "id": "strategy-strengthen-controls",
+        "title": "Strengthen Detective Controls",
+        "description": "Deploy analytics and manual detective controls to close audit-documented gaps.",
+        "linkedRisks": ["unauthorized-transfer", "fraud-detection"]
+      },
+      {
+        "id": "strategy-modernize-voice",
+        "title": "Modernize Voice Authentication",
+        "description": "Introduce adaptive challenge prompts and biometric drift monitoring.",
+        "linkedRisks": ["deepfake-voice"]
+      },
+      {
+        "id": "strategy-sla-automation",
+        "title": "Automate Reversal SLAs",
+        "description": "Trigger automatic escalation if reversal approval exceeds 5 minutes.",
+        "linkedRisks": ["realtime-reversal"]
+      }
+    ],
+    "actionItems": [
+      {
+        "id": "action-train-agents",
+        "title": "Deliver Deepfake Training Module",
+        "ownerRole": "Operations Training",
+        "dueInDays": 14,
+        "linkedRiskId": "deepfake-voice",
+        "recommendedControls": ["agent-training"]
+      },
+      {
+        "id": "action-add-analytics",
+        "title": "Enable Adaptive Fraud Analytics",
+        "ownerRole": "Fraud Analytics",
+        "dueInDays": 21,
+        "linkedRiskId": "fraud-detection",
+        "recommendedControls": ["real-time-monitoring", "model-validation"]
+      },
+      {
+        "id": "action-review-runbook",
+        "title": "Review Reversal Escalation Runbook",
+        "ownerRole": "Wire Operations",
+        "dueInDays": 10,
+        "linkedRiskId": "realtime-reversal",
+        "recommendedControls": ["reversal-escalation"]
+      }
+    ]
+  },
+  "exportTemplates": {
+    "summary": "Wire Transfer Assessment – Executive Brief",
+    "dataPoints": [
+      {
+        "label": "Assessment Name",
+        "valuePath": "process.displayName",
+        "format": "string"
+      },
+      {
+        "label": "Selected Risks",
+        "valuePath": "risks.selected[].title",
+        "format": "list"
+      },
+      {
+        "label": "Residual Risk Reduction",
+        "valuePath": "insights.metrics.riskReduction",
+        "format": "percent"
+      },
+      {
+        "label": "Open Action Items",
+        "valuePath": "responseLibrary.actionItems[].title",
+        "format": "list"
+      }
+    ]
+  }
+}
