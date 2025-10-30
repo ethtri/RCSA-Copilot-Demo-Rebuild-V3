@@ -1,0 +1,97 @@
+{% assign kpi = include.kpi %}
+{% if kpi %}
+  {% assign trend = kpi.trend %}
+  {% assign unit_lower = kpi.unit | downcase %}
+  {% assign display_value = kpi.value %}
+  {% case unit_lower %}
+    {% when 'percent' %}
+      {% assign display_value = kpi.value | append: '%' %}
+    {% when 'days' %}
+      {% assign display_value = kpi.value | round: 1 | append: ' days' %}
+    {% when 'count' %}
+      {% assign display_value = kpi.value | round %}
+    {% else %}
+      {% assign display_value = kpi.value %}
+  {% endcase %}
+  {% assign trend_icon = 'bi-dash' %}
+  {% assign trend_label = 'Flat' %}
+  {% if trend %}
+    {% case trend.direction %}
+      {% when 'up' %}
+        {% assign trend_icon = 'bi-arrow-up-short' %}
+        {% assign trend_label = 'Upward trend' %}
+      {% when 'down' %}
+        {% assign trend_icon = 'bi-arrow-down-short' %}
+        {% assign trend_label = 'Downward trend' %}
+      {% when 'flat' %}
+        {% assign trend_icon = 'bi-dash' %}
+        {% assign trend_label = 'Flat trend' %}
+    {% endcase %}
+  {% endif %}
+  {% assign target_delta = '' %}
+  {% if kpi.target %}
+    {% assign delta_value = kpi.value | minus: kpi.target %}
+    {% assign delta_value_rounded = delta_value | round: 1 %}
+    {% assign delta_prefix = '' %}
+    {% if delta_value_rounded > 0 %}
+      {% assign delta_prefix = '+' %}
+    {% endif %}
+    {% assign target_delta = delta_prefix | append: delta_value_rounded %}
+  {% endif %}
+  <article
+    class="dashboard-kpi card h-100"
+    data-kpi-id="{{ kpi.id }}"
+    data-kpi-direction="{{ trend.direction | default: 'flat' }}"
+  >
+    <div class="card-body">
+      <div class="dashboard-kpi__header d-flex justify-content-between align-items-start mb-3">
+        <div>
+          <h3 class="dashboard-kpi__label h5 mb-1">{{ kpi.label }}</h3>
+          <p class="dashboard-kpi__value display-6 mb-0">{{ display_value }}</p>
+        </div>
+        <span class="dashboard-kpi__trend badge text-bg-light">
+          <i class="bi {{ trend_icon }}" aria-hidden="true"></i>
+          <span class="visually-hidden">{{ trend_label }}</span>
+          {% if trend and trend.percentage %}
+            <span class="dashboard-kpi__trend-value">
+              {{ trend.percentage | append: '%' }}
+            </span>
+          {% endif %}
+        </span>
+      </div>
+      <dl class="dashboard-kpi__meta">
+        {% if kpi.target %}
+          <div class="dashboard-kpi__meta-item">
+            <dt>Target</dt>
+            <dd>{{ kpi.target }}</dd>
+          </div>
+          <div class="dashboard-kpi__meta-item">
+            <dt>Delta</dt>
+            <dd data-kpi-delta>{{ target_delta }}</dd>
+          </div>
+        {% endif %}
+      </dl>
+      {% if kpi.changeNarrative %}
+        <div class="dashboard-kpi__narrative mt-3">
+          <button
+            type="button"
+            class="btn btn-link p-0 dashboard-kpi__narrative-toggle"
+            data-kpi-toggle
+            aria-expanded="false"
+            aria-controls="kpi-{{ kpi.id }}-narrative"
+          >
+            Insight
+          </button>
+          <p
+            id="kpi-{{ kpi.id }}-narrative"
+            class="dashboard-kpi__narrative-copy mt-2"
+            data-kpi-narrative
+            hidden
+          >
+            {{ kpi.changeNarrative }}
+          </p>
+        </div>
+      {% endif %}
+    </div>
+  </article>
+{% endif %}

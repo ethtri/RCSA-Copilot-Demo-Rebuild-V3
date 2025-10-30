@@ -1,0 +1,390 @@
+{% comment %}
+  ROI calculator rebuilt from legacy script (legacy-reference/powerpages/rcsa-copilot-demo---rcsa-demo/web-pages/home/Home.webpage.copy.html:1221)
+  and wired to the mock contract (docs/data-contracts/roi.schema.json).
+{% endcomment %}
+<section
+  id="roi-calculator"
+  class="rcsa-home__section rcsa-home__roi py-5 py-lg-6 bg-primary-subtle"
+  data-section-guid="{{ page_guid }}"
+  data-roi-module
+>
+  <div class="container">
+    <div class="row gy-5 align-items-stretch">
+      <div class="col-lg-5">
+        <div class="mb-4">
+          <p class="text-uppercase text-primary fw-semibold small mb-2">Quantify the impact</p>
+          <h2 class="h2 mb-3" data-roi-headline>Loading ROI headline…</h2>
+          <p class="mb-3 text-secondary" data-roi-subheader>
+            We are loading the ROI defaults from the Sprint 1 mock contract.
+          </p>
+        </div>
+        <form data-roi-form novalidate>
+          <div class="mb-3">
+            <label class="form-label fw-semibold" for="roi-assessments">
+              Monthly assessments
+            </label>
+            <input
+              class="form-control"
+              id="roi-assessments"
+              name="assessmentsPerMonth"
+              type="number"
+              min="1"
+              step="1"
+              inputmode="numeric"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-semibold" for="roi-hours">
+              Hours per assessment
+            </label>
+            <input
+              class="form-control"
+              id="roi-hours"
+              name="baselineHoursPerAssessment"
+              type="number"
+              min="0"
+              step="0.25"
+              inputmode="decimal"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-semibold" for="roi-managers">
+              Managers in program
+            </label>
+            <input
+              class="form-control"
+              id="roi-managers"
+              name="managers"
+              type="number"
+              min="1"
+              step="1"
+              inputmode="numeric"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-semibold" for="roi-hourly">
+              Blended hourly cost (USD)
+            </label>
+            <input
+              class="form-control"
+              id="roi-hourly"
+              name="hourlyCost"
+              type="number"
+              min="0"
+              step="1"
+              inputmode="decimal"
+              required
+            />
+          </div>
+          <p class="text-danger small d-none" data-roi-error role="alert"></p>
+          <button type="button" class="btn btn-primary w-100" data-roi-cta>
+            Calculate ROI
+          </button>
+        </form>
+        <p class="small text-secondary mt-3 mb-0" data-roi-disclaimer>
+          Loading disclaimer…
+        </p>
+      </div>
+      <div class="col-lg-7">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body p-4 p-lg-5 d-flex flex-column justify-content-between">
+            <div class="mb-4">
+              <p class="text-uppercase text-muted fw-semibold small mb-2">Projected results</p>
+              <p class="mb-0 text-secondary">
+                Figures refresh instantly as you adjust the inputs. Time reduction is sourced from the legacy ROI model.
+              </p>
+            </div>
+            <div class="row row-cols-1 row-cols-sm-2 g-4" aria-live="polite">
+              <div class="col">
+                <div class="text-center">
+                  <p class="text-muted mb-1" data-roi-label="annualHoursSaved">Annual Hours Saved</p>
+                  <p class="display-6 fw-bold mb-0" data-roi-value="annualHoursSaved">--</p>
+                </div>
+              </div>
+              <div class="col">
+                <div class="text-center">
+                  <p class="text-muted mb-1" data-roi-label="annualCostSaved">Annual Cost Savings</p>
+                  <p class="display-6 fw-bold mb-0" data-roi-value="annualCostSaved">--</p>
+                </div>
+              </div>
+              <div class="col">
+                <div class="text-center">
+                  <p class="text-muted mb-1" data-roi-label="efficiencyGain">Efficiency Gain</p>
+                  <p class="display-6 fw-bold mb-0" data-roi-value="efficiencyGain">--</p>
+                </div>
+              </div>
+              <div class="col">
+                <div class="text-center">
+                  <p class="text-muted mb-1" data-roi-label="roiPercent">Projected ROI</p>
+                  <p class="display-6 fw-bold mb-0" data-roi-value="roiPercent">--</p>
+                </div>
+              </div>
+            </div>
+            <div class="mt-4">
+              <a class="btn btn-outline-primary btn-lg w-100" href="/contact" data-roi-secondary-cta>
+                Talk with an expert
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const scriptEl = document.currentScript;
+      const rootCandidate = scriptEl ? scriptEl.parentElement : null;
+      const root = rootCandidate && rootCandidate.matches('[data-roi-module]')
+        ? rootCandidate
+        : document.querySelector('[data-roi-module]');
+
+      if (!root) {
+        return;
+      }
+
+      const dataUrl = '{{ "/data/roi-calculator.mock.json" | relative_url }}';
+      const defaultLabels = {
+        annualHoursSaved: 'Annual Hours Saved',
+        annualCostSaved: 'Annual Cost Savings',
+        efficiencyGain: 'Efficiency Gain',
+        roiPercent: 'Projected ROI'
+      };
+
+      const form = root.querySelector('[data-roi-form]');
+      const primaryCta = root.querySelector('[data-roi-cta]');
+      const headlineEl = root.querySelector('[data-roi-headline]');
+      const subheaderEl = root.querySelector('[data-roi-subheader]');
+      const disclaimerEl = root.querySelector('[data-roi-disclaimer]');
+      const errorEl = root.querySelector('[data-roi-error]');
+
+      let contractCache = null;
+      let numberFormatter = null;
+      let currencyFormatter = null;
+
+      function setError(message) {
+        if (!errorEl) {
+          return;
+        }
+        if (!message) {
+          errorEl.classList.add('d-none');
+          errorEl.textContent = '';
+          return;
+        }
+        errorEl.textContent = message;
+        errorEl.classList.remove('d-none');
+      }
+
+      function clampValue(key, value) {
+        if (!contractCache || !contractCache.thresholds) {
+          return value;
+        }
+        const limits = contractCache.thresholds;
+        if (key === 'assessmentsPerMonth' && limits.maxAssessmentsPerMonth) {
+          return Math.min(value, limits.maxAssessmentsPerMonth);
+        }
+        if (key === 'managers' && limits.maxManagers) {
+          return Math.min(value, limits.maxManagers);
+        }
+        return value;
+      }
+
+      function toNumber(value, fallback) {
+        const parsed = Number(value);
+        return Number.isFinite(parsed) ? parsed : fallback;
+      }
+
+      function readValues() {
+        if (!form || !contractCache) {
+          return null;
+        }
+        const defaults = contractCache.defaults;
+        const controls = {
+          assessmentsPerMonth: form.querySelector('[name="assessmentsPerMonth"]'),
+          baselineHoursPerAssessment: form.querySelector('[name="baselineHoursPerAssessment"]'),
+          managers: form.querySelector('[name="managers"]'),
+          hourlyCost: form.querySelector('[name="hourlyCost"]')
+        };
+
+        const assessments = clampValue(
+          'assessmentsPerMonth',
+          Math.max(
+            toNumber(controls.assessmentsPerMonth && controls.assessmentsPerMonth.value, defaults.assessmentsPerMonth),
+            1
+          )
+        );
+        const baselineHours = Math.max(
+          toNumber(
+            controls.baselineHoursPerAssessment && controls.baselineHoursPerAssessment.value,
+            defaults.baselineHoursPerAssessment
+          ),
+          0
+        );
+        const managers = clampValue(
+          'managers',
+          Math.max(
+            toNumber(controls.managers && controls.managers.value, defaults.managers),
+            1
+          )
+        );
+        const hourlyCost = Math.max(
+          toNumber(controls.hourlyCost && controls.hourlyCost.value, defaults.hourlyCost),
+          0
+        );
+
+        return {
+          assessmentsPerMonth: assessments,
+          baselineHoursPerAssessment: baselineHours,
+          managers,
+          hourlyCost
+        };
+      }
+
+      function formatResult(key, value) {
+        if (!contractCache) {
+          return value;
+        }
+        switch (key) {
+          case 'annualHoursSaved':
+            return numberFormatter.format(Math.round(value));
+          case 'annualCostSaved':
+            return currencyFormatter.format(Math.max(value, 0));
+          case 'roiPercent':
+            return `${Math.round(value)}%`;
+          case 'efficiencyGain':
+            return `${Math.round(value)}%`;
+          default:
+            return value;
+        }
+      }
+
+      function updateResults() {
+        const values = readValues();
+        if (!values || !contractCache) {
+          return;
+        }
+
+        const multipliers = contractCache.multipliers;
+        const timeReduction = multipliers.timeReduction;
+        const annualAssessments =
+          values.assessmentsPerMonth *
+          (multipliers.assessmentToYearMultiplier || 12);
+        const newTime = values.baselineHoursPerAssessment * (1 - timeReduction);
+        const timeSavedPerAssessment = Math.max(values.baselineHoursPerAssessment - newTime, 0);
+        const totalHoursSaved = annualAssessments * timeSavedPerAssessment;
+        const totalCostSaved = totalHoursSaved * values.hourlyCost;
+        const platformCost = values.managers * multipliers.platformCostPerManager;
+        const netSavings = totalCostSaved - platformCost;
+        const roiPercent = platformCost > 0 ? (netSavings / platformCost) * 100 : 0;
+        const efficiencyGain = timeReduction * 100;
+
+        const results = {
+          annualHoursSaved: totalHoursSaved,
+          annualCostSaved: totalCostSaved,
+          efficiencyGain,
+          roiPercent
+        };
+
+        Object.entries(results).forEach(([key, rawValue]) => {
+          const labelEl = root.querySelector(`[data-roi-label="${key}"]`);
+          const valueEl = root.querySelector(`[data-roi-value="${key}"]`);
+          if (labelEl) {
+            const contractLabel =
+              contractCache.formatting.valueLabels &&
+              contractCache.formatting.valueLabels[key];
+            labelEl.textContent = contractLabel || defaultLabels[key] || key;
+          }
+          if (valueEl) {
+            valueEl.textContent = formatResult(key, rawValue);
+          }
+        });
+      }
+
+      function hydrateInputs() {
+        if (!form || !contractCache) {
+          return;
+        }
+        const defaults = contractCache.defaults;
+        const thresholds = contractCache.thresholds || {};
+
+        const controlMap = {
+          assessmentsPerMonth: form.querySelector('[name="assessmentsPerMonth"]'),
+          baselineHoursPerAssessment: form.querySelector('[name="baselineHoursPerAssessment"]'),
+          managers: form.querySelector('[name="managers"]'),
+          hourlyCost: form.querySelector('[name="hourlyCost"]')
+        };
+
+        Object.entries(controlMap).forEach(([key, control]) => {
+          if (!control) {
+            return;
+          }
+          control.value = defaults[key];
+          if (key === 'assessmentsPerMonth' && thresholds.maxAssessmentsPerMonth) {
+            control.setAttribute('max', thresholds.maxAssessmentsPerMonth);
+          }
+          if (key === 'managers' && thresholds.maxManagers) {
+            control.setAttribute('max', thresholds.maxManagers);
+          }
+        });
+      }
+
+      function hydrateCopy() {
+        if (!contractCache) {
+          return;
+        }
+        if (headlineEl) {
+          headlineEl.textContent = contractCache.copy.headline;
+        }
+        if (subheaderEl) {
+          subheaderEl.textContent = contractCache.copy.subheader;
+        }
+        if (disclaimerEl) {
+          disclaimerEl.textContent = contractCache.copy.disclaimer;
+        }
+        if (primaryCta) {
+          primaryCta.textContent = contractCache.copy.cta;
+        }
+      }
+
+      function initHandlers() {
+        if (!form) {
+          return;
+        }
+        form.addEventListener('input', updateResults);
+        form.addEventListener('change', updateResults);
+        if (primaryCta) {
+          primaryCta.addEventListener('click', updateResults);
+        }
+      }
+
+      fetch(dataUrl)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`ROI contract request failed (${response.status})`);
+          }
+          return response.json();
+        })
+        .then((contract) => {
+          contractCache = contract;
+          root.setAttribute('data-roi-version', contract.version);
+          numberFormatter = new Intl.NumberFormat(contract.formatting.numberLocale || 'en-US');
+          currencyFormatter = new Intl.NumberFormat(contract.formatting.numberLocale || 'en-US', {
+            style: 'currency',
+            currency: contract.formatting.currency || 'USD'
+          });
+
+          hydrateCopy();
+          hydrateInputs();
+          setError(null);
+          initHandlers();
+          updateResults();
+        })
+        .catch((error) => {
+          console.error('ROI calculator failed to load contract', error);
+          setError('Unable to load ROI defaults. Please retry after refreshing the page.');
+        });
+    })();
+  </script>
+</section>

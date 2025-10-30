@@ -1,0 +1,20 @@
+(function () {
+  const filter = document.querySelector("[data-action-filter]");
+  const list = document.querySelector("[data-action-list]");
+  if (!filter || !list) {
+    return;
+  }
+
+  function applyFilter(status) {
+    const cards = list.querySelectorAll("[data-action-status]");
+    cards.forEach((card) => {
+      const value = card.getAttribute("data-action-status");
+      const match = status === "all" || value === status;
+      card.classList.toggle("d-none", !match);
+    });
+  }
+
+  filter.addEventListener("change", () => {
+    applyFilter(filter.value || "all");
+  });
+})();

@@ -1,0 +1,20 @@
+---
+layout: default
+title: RCSA Copilot Home
+description: "Modern RCSA experience rebuilt for Sprint 1 Agent 1.4."
+---
+
+{% comment %}
+  Agent 1.4 deliverable rebuilt from legacy reference
+  (legacy-reference/powerpages/rcsa-copilot-demo---rcsa-demo/web-pages/home/Home.webpage.copy.html:1).
+  Home page GUID: ff3226c2-b362-456e-bc3a-93f91165b1a0 (docs/page-guid-map.md:6).
+{% endcomment %}
+{% assign page_guid = 'ff3226c2-b362-456e-bc3a-93f91165b1a0' %}
+
+<div class="rcsa-home" data-page-guid="{{ page_guid }}">
+  {% include_relative sections/hero.liquid %}
+  {% include_relative sections/trust-badges.liquid %}
+  {% include_relative sections/roi-band.liquid %}
+  {% include_relative sections/cta.liquid %}
+  {% include_relative sections/resources.liquid %}
+</div>

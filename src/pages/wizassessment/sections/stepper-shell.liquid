@@ -1,0 +1,47 @@
+{% assign stepper_guid = page_guid | default: 'unknown-guid' %}
+{% assign data_url = mock_url | default: '' %}
+<section
+  id="wiz-stepper"
+  class="rcsa-wiz__stepper container py-5"
+  data-stepper-root
+  data-page-guid="{{ stepper_guid }}"
+  data-mock-url="{{ data_url }}"
+>
+  <header class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+    <div>
+      <h2 class="h3 fw-semibold mb-1">Assessment Stepper</h2>
+      <p class="text-muted mb-0 small">
+        Renders guided steps using {{ data_url | default: '/data/wizard-insights.mock.json' }}
+        defined in docs/data-contracts/wizard.schema.json.
+      </p>
+    </div>
+    <div class="d-flex align-items-center gap-2">
+      <label class="form-label mb-0 me-2 text-muted small" for="wiz-stepper-mode">
+        Mode
+      </label>
+      <select
+        id="wiz-stepper-mode"
+        class="form-select form-select-sm"
+        data-mode-selector
+        aria-label="Wizard mode"
+      >
+        <option selected disabled>Loading…</option>
+      </select>
+    </div>
+  </header>
+
+  <div class="rcsa-stepper-shell border rounded-3 p-4 bg-white shadow-sm">
+    <nav aria-label="Assessment steps">
+      <ol class="list-unstyled d-flex flex-wrap gap-3 mb-0" data-stepper-list>
+        <li class="text-muted">Awaiting step data…</li>
+      </ol>
+    </nav>
+    <div class="mt-4" data-stepper-status role="status" aria-live="polite"></div>
+    <div class="mt-4" data-stepper-content>
+      <div class="alert alert-info mb-0">
+        Guided step content placeholder. Agent 1.6B replaces this with risk,
+        control, and AI insight panes backed by the wizard contract.
+      </div>
+    </div>
+  </div>
+</section>

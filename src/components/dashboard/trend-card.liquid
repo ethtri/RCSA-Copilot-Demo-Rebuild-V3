@@ -1,0 +1,91 @@
+{% assign trend = include.trend %}
+{% if trend %}
+  {% assign primary_series = trend.series | first %}
+  <article class="dashboard-trend card h-100" data-trend-id="{{ trend.id }}">
+    <div class="card-body">
+      <div class="dashboard-trend__header d-flex justify-content-between align-items-start mb-3">
+        <div>
+          <h3 class="dashboard-trend__title h5 mb-1">{{ trend.title }}</h3>
+          {% if trend.description %}
+            <p class="dashboard-trend__description text-muted mb-0">
+              {{ trend.description }}
+            </p>
+          {% endif %}
+        </div>
+        {% if primary_series and primary_series.target %}
+          <span class="badge text-bg-secondary">
+            Target: {{ primary_series.target }}
+          </span>
+        {% endif %}
+      </div>
+      <div class="dashboard-trend__chart" data-trend-chart aria-hidden="true">
+        <svg
+          class="dashboard-trend__sparkline"
+          viewBox="0 0 100 30"
+          preserveAspectRatio="none"
+          focusable="false"
+        ></svg>
+      </div>
+      <div class="dashboard-trend__controls mt-3">
+        <button
+          type="button"
+          class="btn btn-sm btn-outline-primary"
+          data-trend-toggle
+          aria-expanded="false"
+          aria-controls="trend-{{ trend.id }}-table"
+        >
+          View data table
+        </button>
+      </div>
+      <div
+        id="trend-{{ trend.id }}-table"
+        class="dashboard-trend__table mt-3"
+        data-trend-table
+        hidden
+      >
+        {% if primary_series %}
+          <table class="table table-sm mb-0">
+            <thead>
+              <tr>
+                <th scope="col">Date</th>
+                <th scope="col">{{ primary_series.name }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for entry in primary_series.values %}
+                <tr>
+                  <th scope="row">
+                    <time datetime="{{ entry.date }}">
+                      {{ entry.date | date: "%b %d" }}
+                    </time>
+                  </th>
+                  <td>{{ entry.value }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        {% endif %}
+      </div>
+      <noscript>
+        <div class="dashboard-trend__table mt-3">
+          <strong>Data table:</strong>
+          {% if primary_series %}
+            <ul class="list-unstyled mb-0">
+              {% for entry in primary_series.values %}
+                <li>
+                  <time datetime="{{ entry.date }}">
+                    {{ entry.date | date: "%b %d" }}
+                  </time>
+                  – {{ entry.value }}
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </div>
+      </noscript>
+    </div>
+    <script type="application/json" data-trend-payload>
+      {{ trend | jsonify }}
+    </script>
+  </article>
+{% endif %}

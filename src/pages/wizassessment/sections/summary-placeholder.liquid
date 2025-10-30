@@ -1,0 +1,41 @@
+{% assign summary_guid = page_guid | default: 'unknown-guid' %}
+<section
+  class="rcsa-wiz__summary container py-5"
+  data-wizard-section="summary"
+  data-page-guid="{{ summary_guid }}"
+>
+  <div class="row g-4">
+    <div class="col-lg-8">
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-body">
+          <h2 class="h4 fw-semibold mb-3">Insights &amp; Recommendations</h2>
+          <p class="text-muted mb-4">
+            Placeholder for AI-generated insights, recommendations, and export
+            summaries sourced from responseLibrary and exportTemplates.
+            Agent 1.6B wires this section to the stepper state store.
+          </p>
+          <div class="placeholder-glow">
+            <span class="placeholder col-7"></span>
+            <span class="placeholder col-5"></span>
+            <span class="placeholder col-6"></span>
+            <span class="placeholder col-8"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-body">
+          <h3 class="h5 fw-semibold mb-3">Wizard State Debug</h3>
+          <p class="text-muted small">
+            Lightweight preview of the in-memory state so downstream work can
+            verify bindings without production services.
+          </p>
+          <pre class="bg-light rounded-3 p-3 small mb-0" data-state-dump>
+{}
+          </pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

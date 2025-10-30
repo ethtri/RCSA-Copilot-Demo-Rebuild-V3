@@ -1,0 +1,29 @@
+(function () {
+  const cards = document.querySelectorAll(".dashboard-kpi");
+  if (!cards.length) {
+    return;
+  }
+
+  cards.forEach((card) => {
+    const direction = card.dataset.kpiDirection || "flat";
+    card.classList.add(`dashboard-kpi--${direction}`);
+
+    const toggle = card.querySelector("[data-kpi-toggle]");
+    const narrative = card.querySelector("[data-kpi-narrative]");
+
+    if (!toggle || !narrative) {
+      return;
+    }
+
+    toggle.addEventListener("click", () => {
+      const isHidden = narrative.hasAttribute("hidden");
+      if (isHidden) {
+        narrative.removeAttribute("hidden");
+      } else {
+        narrative.setAttribute("hidden", "");
+      }
+      const expanded = narrative.hasAttribute("hidden") ? "false" : "true";
+      toggle.setAttribute("aria-expanded", expanded);
+    });
+  });
+})();

@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "build:design-system": "node tools/build-design-system.mjs",
-    "test:data-contracts": "node tools/validate-data-contracts.js"
+    "test:data-contracts": "node tools/validate-data-contracts.js",
+    "sync:dashboard-data": "node tools/sync-dashboard-data.mjs"
   },
   "devDependencies": {
     "ajv": "^8.17.1",

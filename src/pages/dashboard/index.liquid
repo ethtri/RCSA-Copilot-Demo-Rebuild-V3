@@ -1,0 +1,60 @@
+---
+layout: default
+title: "1LoD Dashboard"
+permalink: "/scrDashboard_1LOD"
+pageGuid: "baca011a-2023-437c-9fae-e8dbef66d129"
+navigationParent:
+  label: "Home"
+  guid: "ff3226c2-b362-456e-bc3a-93f91165b1a0"
+  source: "docs/page-guid-map.md"
+---
+
+{% comment %}
+  Agent 1.5 rebuild rooted in docs/target-architecture-blueprint.md:49
+  and legacy-reference/powerpages/.../scrDashboard_1LoD.en-US.webpage.copy.html:31.
+{% endcomment %}
+
+{% capture dashboard_metrics_source %}
+  {% render 'dashboard/dashboard-data.json' %}
+{% endcapture %}
+{% assign dashboard_metrics = dashboard_metrics_source | strip | from_json %}
+
+<section class="dashboard-wrapper">
+  {% render 'dashboard/summary-banner',
+    summary: dashboard_metrics.summary,
+    version: dashboard_metrics.version,
+    updated_at: dashboard_metrics.updatedAt %}
+
+  {% render 'dashboard/kpi-grid', kpis: dashboard_metrics.kpis %}
+
+  {% render 'dashboard/trend-grid', trends: dashboard_metrics.trendSeries %}
+
+  {% render 'dashboard/action-queue', queue: dashboard_metrics.actionQueue %}
+
+  {% render 'dashboard/alerts-panel', alerts: dashboard_metrics.alerts %}
+
+  {% render 'dashboard/data-quality', quality: dashboard_metrics.dataQuality %}
+</section>
+
+{% capture dashboard_footer_scripts %}
+  <script type="application/json" id="rcsa-dashboard-data">
+    {{ dashboard_metrics_source | strip }}
+  </script>
+  <script>
+    {% render 'dashboard/kpi-card.js' %}
+  </script>
+  <script>
+    {% render 'dashboard/trend-card.js' %}
+  </script>
+  <script>
+    {% render 'dashboard/alerts-panel.js' %}
+  </script>
+  <script>
+    {% render 'dashboard/action-queue.js' %}
+  </script>
+{% endcapture %}
+
+{% capture content_for_footer %}
+  {{ content_for_footer }}
+  {{ dashboard_footer_scripts | strip }}
+{% endcapture %}

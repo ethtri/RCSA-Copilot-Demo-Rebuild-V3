@@ -1,0 +1,51 @@
+{% assign summary = include.summary %}
+{% assign version = include.version %}
+{% assign updated_at = include.updated_at %}
+{% if summary %}
+  <section class="dashboard-section dashboard-summary">
+    <div class="container">
+      <div class="row align-items-center gy-3">
+        <div class="col-lg-8">
+          <h1 class="dashboard-summary__title mb-2">
+            1LoD Executive Dashboard
+          </h1>
+          <p class="dashboard-summary__description mb-0">
+            Tracking residual risk posture, remediation velocity, and control coverage for the Home navigation stream.
+          </p>
+        </div>
+        <div class="col-lg-4">
+          <dl class="dashboard-summary__meta mb-0">
+            <div class="dashboard-summary__meta-item">
+              <dt>Reporting window</dt>
+              <dd>{{ summary.reportingWindow }}</dd>
+            </div>
+            <div class="dashboard-summary__meta-item">
+              <dt>Refresh cadence</dt>
+              <dd>{{ summary.refreshFrequency }}</dd>
+            </div>
+            <div class="dashboard-summary__meta-item">
+              <dt>Data mode</dt>
+              <dd class="text-uppercase">{{ summary.dataMode }}</dd>
+            </div>
+            {% if version %}
+              <div class="dashboard-summary__meta-item">
+                <dt>Contract version</dt>
+                <dd>{{ version }}</dd>
+              </div>
+            {% endif %}
+            {% if updated_at %}
+              <div class="dashboard-summary__meta-item">
+                <dt>Last updated</dt>
+                <dd>
+                  <time datetime="{{ updated_at }}">
+                    {{ updated_at | date: "%b %d, %Y %H:%M %Z" }}
+                  </time>
+                </dd>
+              </div>
+            {% endif %}
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endif %}

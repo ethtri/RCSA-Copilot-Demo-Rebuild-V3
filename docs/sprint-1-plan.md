@@ -31,11 +31,11 @@
 | Agent | Task Focus | Status | Deliverable Path(s) | Reviewer | Dependencies |
 | --- | --- | --- | --- | --- | --- |
 | 1.1 | Design system refactor | In Review – `npm run build:design-system` 2025-10-30 | `design-system/tokens/*.json`, `design-system/src/` | Tech Lead | - |
-| 1.2 | Shared header & layout | Planned | `src/templates/layouts/default.liquid`, `src/templates/includes/header.liquid` | UX Reviewer | 1.1 |
-| 1.3 | Data contracts & mocks | In Progress | `docs/data-contracts/`, `src/data/`, `tools/validate-data-contracts.js`, `package.json#L7` (`test:data-contracts`) | Data Steward | 1.1 |
-| 1.4 | Home page rebuild | Planned | `src/pages/home/**` | UX Reviewer | 1.2, 1.3 |
-| 1.5 | Dashboard rebuild | Planned | `src/pages/dashboard/**`, `src/components/dashboard/**` | Tech Lead | 1.2, 1.3 |
-| 1.6 | WizAssessment rebuild | Planned | `src/pages/wizassessment/**` | Tech Lead | 1.2, 1.3 |
+| 1.2 | Shared header & layout | Complete - layout chrome merged; `npm run build:design-system` 2025-10-30 (Agent 1.2H) | `src/templates/layouts/default.liquid`, `src/templates/includes/header.liquid`, `src/templates/includes/navigation.json.liquid`, `src/templates/includes/footer.liquid` | UX Reviewer | 1.1 |
+| 1.3 | Data contracts & mocks | Complete - mocks validated via `npm run test:data-contracts` 2025-10-30 | `docs/data-contracts/`, `src/data/`, `tools/validate-data-contracts.js`, `package.json#L7` (`test:data-contracts`) | Data Steward | 1.1 |
+| 1.4 | Home page rebuild | In Review – `npm run test:data-contracts` 2025-10-30 | `src/pages/home/index.liquid`, `src/pages/home/sections/`, `src/data/roi-calculator.mock.json` | UX Reviewer | 1.2, 1.3 – V7 page GUIDs confirmed 2025-10-30 (`docs/page-guid-map.md`) |
+| 1.5 | Dashboard rebuild | In Review – components wired; `npm run test:data-contracts` 2025-10-30 | `src/pages/dashboard/**`, `src/components/dashboard/**`, `docs/dashboard-module-notes.md` | Tech Lead | 1.2, 1.3 – V7 page GUIDs confirmed 2025-10-30 (`docs/page-guid-map.md`) |
+| 1.6 | WizAssessment rebuild | In Progress – skeleton + stepper mock wired (Agent 1.6A) 2025-10-30 | `src/pages/wizassessment/index.liquid`, `src/pages/wizassessment/sections/`, `src/pages/wizassessment/modules/stepper.js`, `src/pages/wizassessment/README.md` | Tech Lead | 1.2, 1.3 – V7 page GUIDs confirmed 2025-10-30 (`docs/page-guid-map.md`); schema follow-up for step metadata |
 | 1.7 | CLI & automation rehearsal | Planned | `tools/`, `package.json`, pipeline template | Release Engineer | 1.1, 1.3, 1.4-1.6 |
 
 _Verification_: 2025-10-30 – `npm run test:data-contracts` ✅ ROI, Dashboard, and Wizard mocks validated against seeded schemas.

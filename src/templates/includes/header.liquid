@@ -1,0 +1,132 @@
+{% assign current_path = request.path | downcase | default: '/' %}
+{% if current_path == '' %}
+  {% assign current_path = '/' %}
+{% endif %}
+
+{% capture navigation_source %}
+  {% include 'navigation.json' %}
+{% endcapture %}
+{% assign navigation_items = navigation_source | strip | from_json %}
+{% if navigation_items == blank %}
+  {% assign navigation_items = '' | split: '' %}
+{% endif %}
+{% assign navigation_count = navigation_items | size %}
+{% if navigation_count > 0 %}
+  {% assign cta_link = navigation_items | last %}
+{% endif %}
+{% if navigation_count > 1 %}
+  {% assign primary_links_count = navigation_count | minus: 1 %}
+  {% assign primary_links = navigation_items | slice: 0, primary_links_count %}
+{% else %}
+  {% assign primary_links = navigation_items %}
+{% endif %}
+
+{% comment %}
+  Active-state logic preserved per legacy header template
+  (legacy-reference/powerpages/rcsa-copilot-demo---rcsa-demo/web-templates/header/Header.webtemplate.source.html:12-:48).
+{% endcomment %}
+{% assign home_active = current_path == '/' or current_path == '/home' %}
+
+<header class="rcsa-site-header u-z-header">
+  <div class="rcsa-site-header__skip">
+    <a href="#mainContent">
+      {{ resx.Skip_To_Content | default: 'Skip to main content' }}
+    </a>
+  </div>
+  <nav class="navbar navbar-expand-xl rcsa-site-header__nav" role="navigation">
+    <div class="container-fluid px-0 align-items-center">
+      <a class="navbar-brand rcsa-site-header__brand" href="~/">
+        <span class="rcsa-site-header__logo" aria-hidden="true">AI</span>
+        <span class="rcsa-site-header__product">RCSA Copilot</span>
+      </a>
+      <button
+        class="navbar-toggler rcsa-site-header__toggle"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#rcsaPrimaryNav"
+        aria-controls="rcsaPrimaryNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="rcsaPrimaryNav">
+        <ul class="navbar-nav align-items-center mb-2 mb-xl-0">
+          {% for link in primary_links %}
+            {% assign link_href = link.href | default: '/' %}
+            {% assign link_path = link_href | downcase %}
+            {% assign is_active = false %}
+            {% if link_path == '/' %}
+              {% if home_active %}
+                {% assign is_active = true %}
+              {% endif %}
+            {% elsif current_path == link_path %}
+              {% assign is_active = true %}
+            {% endif %}
+            <li class="nav-item rcsa-site-header__item">
+              <a
+                class="nav-link rcsa-site-header__link{% if is_active %} is-active{% endif %}"
+                href="{{ link_href }}"
+                {% if link.label %}
+                  aria-label="{{ link.label }}"
+                {% endif %}
+              >
+                {% if link.icon %}
+                  <i class="bi {{ link.icon }}" aria-hidden="true"></i>
+                {% endif %}
+                <span class="rcsa-site-header__label">{{ link.label }}</span>
+              </a>
+            </li>
+          {% endfor %}
+          {% if navigation_count > 1 and cta_link %}
+            <li class="nav-item rcsa-site-header__item rcsa-site-header__item--cta ms-xl-2">
+              <a
+                class="rcsa-site-header__cta"
+                href="{{ cta_link.href }}"
+                aria-label="{{ cta_link.label }}"
+              >
+                {% if cta_link.icon %}
+                  <i class="bi {{ cta_link.icon }}" aria-hidden="true"></i>
+                {% endif %}
+                <span class="rcsa-site-header__label">{{ cta_link.label }}</span>
+              </a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+{% assign current_page = page.id %}
+{% assign search_marker = sitemarkers['Search'] %}
+{% assign forum_marker = sitemarkers['Forums'] %}
+
+{% if current_page and (search_marker or forum_marker) %}
+  {% assign search_page_id = search_marker.id %}
+  {% assign forum_page_id = forum_marker.id %}
+
+  {% if current_page == search_page_id or current_page == forum_page_id %}
+    {% assign section_class = '' %}
+    {% if current_page == search_page_id %}
+      {% assign section_class = 'section-landing-search' %}
+    {% endif %}
+    {% if current_page == forum_page_id %}
+      {% assign section_class = 'section-landing-forums' %}
+    {% endif %}
+    <section class="page_section {{ section_class | h }} color-inverse">
+      <div class="row sectionBlockLayout sectionFixedStyle text-center">
+        <div class="container">
+          <div class="col-lg-12 columnBlockLayout d-flex flex-column justify-content-center">
+            {% if current_page == search_page_id %}
+              <h1 id="mainContent">
+                {% editable snippets 'Search/Title' default: resx['Discover_Contoso'] %}
+              </h1>
+              {% include 'Search' search_id: 'search_control' %}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </section>
+  {% endif %}
+{% endif %}

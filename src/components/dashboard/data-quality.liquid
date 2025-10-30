@@ -1,0 +1,31 @@
+{% assign quality = include.quality %}
+{% if quality %}
+  <section class="dashboard-section dashboard-data-quality">
+    <div class="container">
+      <div class="alert alert-info d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between gap-3 mb-0">
+        <div>
+          <h2 class="h6 mb-1">Data Quality Signal</h2>
+          {% if quality.notes %}
+            <p class="mb-0">
+              {{ quality.notes }}
+            </p>
+          {% endif %}
+        </div>
+        <dl class="dashboard-data-quality__metrics mb-0 d-flex flex-wrap gap-4">
+          {% if quality.completeness or quality.completeness == 0 %}
+            <div class="dashboard-data-quality__metric">
+              <dt class="text-muted small text-uppercase">Completeness</dt>
+              <dd class="fw-semibold">{{ quality.completeness }}%</dd>
+            </div>
+          {% endif %}
+          {% if quality.lagDays or quality.lagDays == 0 %}
+            <div class="dashboard-data-quality__metric">
+              <dt class="text-muted small text-uppercase">Lag (days)</dt>
+              <dd class="fw-semibold">{{ quality.lagDays }}</dd>
+            </div>
+          {% endif %}
+        </dl>
+      </div>
+    </div>
+  </section>
+{% endif %}

@@ -105,7 +105,7 @@ async function compileScss(entryFile, outFile) {
   await fs.mkdir(path.dirname(outFile), { recursive: true });
   await fs.writeFile(outFile, result.css, "utf8");
   const relativePath = path.relative(projectRoot, outFile);
-  console.log(`✓ ${relativePath}`);
+  console.log(`[build] ${relativePath}`);
 }
 
 async function main() {
@@ -126,6 +126,10 @@ async function main() {
     {
       entry: path.join(srcDir, "utilities.scss"),
       outFile: path.join(distDir, "rcsa-utilities.css")
+    },
+    {
+      entry: path.join(srcDir, "components.scss"),
+      outFile: path.join(distDir, "rcsa-components.css")
     }
   ];
 
@@ -140,3 +144,4 @@ main().catch((error) => {
   console.error(error);
   process.exitCode = 1;
 });
+

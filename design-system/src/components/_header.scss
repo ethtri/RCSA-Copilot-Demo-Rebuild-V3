@@ -1,0 +1,179 @@
+@use "../tokens.generated" as tokens;
+
+.rcsa-site-header {
+  --rcsa-shell-header-height: 5rem;
+
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: linear-gradient(
+    135deg,
+    var(--rcsa-color-brand-captech-primary) 0%,
+    var(--rcsa-color-brand-captech-primary-dark) 60%,
+    var(--rcsa-color-brand-captech-primary) 100%
+  );
+  border-bottom: 0.1875rem solid var(--rcsa-color-brand-captech-primary-light);
+  box-shadow: var(--rcsa-effects-shadow-lg);
+  color: var(--rcsa-color-neutrals-white);
+  font-family: var(--rcsa-typography-font-family-base);
+  backdrop-filter: blur(12px);
+}
+
+.rcsa-site-header__nav {
+  min-height: var(--rcsa-shell-header-height);
+  padding-block: var(--rcsa-spacing-scale-sm);
+}
+
+.rcsa-site-header__skip {
+  position: absolute;
+  inset-inline-start: 1rem;
+  inset-block-start: 0.5rem;
+  z-index: calc(var(--rcsa-layout-z-index-header) + 1);
+}
+
+.rcsa-site-header__skip a {
+  position: absolute;
+  transform: translateY(-200%);
+  background: var(--rcsa-color-neutrals-white);
+  color: var(--rcsa-color-brand-captech-primary);
+  padding: 0.5rem 1rem;
+  border-radius: var(--rcsa-layout-radius-md);
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: var(--rcsa-effects-shadow-md);
+  transition: var(--rcsa-effects-motion-transition-default);
+}
+
+.rcsa-site-header__skip a:focus {
+  transform: none;
+}
+
+.rcsa-site-header__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--rcsa-spacing-scale-sm);
+  color: var(--rcsa-color-neutrals-white);
+  font-weight: 700;
+  font-size: var(--rcsa-typography-scale-2xl);
+  text-decoration: none;
+  transition: var(--rcsa-effects-motion-transition-default);
+}
+
+.rcsa-site-header__brand:hover,
+.rcsa-site-header__brand:focus {
+  text-decoration: none;
+  color: var(--rcsa-color-neutrals-white);
+  opacity: 0.95;
+}
+
+.rcsa-site-header__logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--rcsa-layout-radius-lg);
+  background: var(--rcsa-color-brand-captech-primary-light);
+  color: var(--rcsa-color-neutrals-white);
+  font-weight: 700;
+  font-size: var(--rcsa-typography-scale-xl);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.rcsa-site-header__product {
+  line-height: 1.1;
+}
+
+.rcsa-site-header__item {
+  margin-inline: 0.125rem;
+}
+
+.rcsa-site-header__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 500;
+  padding: 0.35rem 0.95rem;
+  border-radius: var(--rcsa-layout-radius-lg);
+  transition: var(--rcsa-effects-motion-transition-default);
+}
+
+.rcsa-site-header__link:hover,
+.rcsa-site-header__link:focus {
+  color: var(--rcsa-color-neutrals-white);
+  background: rgba(255, 255, 255, 0.16);
+  text-decoration: none;
+}
+
+.rcsa-site-header__link.is-active {
+  color: var(--rcsa-color-neutrals-white);
+  background: rgba(255, 255, 255, 0.22);
+  box-shadow: var(--rcsa-effects-shadow-md);
+}
+
+.rcsa-site-header__link .bi {
+  font-size: var(--rcsa-typography-scale-lg);
+}
+
+.rcsa-site-header__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(
+    135deg,
+    var(--rcsa-color-brand-captech-primary) 0%,
+    var(--rcsa-color-brand-captech-primary-dark) 100%
+  );
+  color: var(--rcsa-color-neutrals-white);
+  border-radius: var(--rcsa-layout-radius-xl);
+  font-weight: 600;
+  padding: 0.5rem 1.25rem;
+  text-decoration: none;
+  box-shadow: var(--rcsa-effects-shadow-md);
+  transition: var(--rcsa-effects-motion-transition-default);
+}
+
+.rcsa-site-header__cta:hover,
+.rcsa-site-header__cta:focus {
+  color: var(--rcsa-color-neutrals-white);
+  transform: translateY(-1px);
+  box-shadow: var(--rcsa-effects-shadow-lg);
+}
+
+.rcsa-site-header__toggle {
+  border-color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.rcsa-site-header__toggle:focus {
+  box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.35);
+}
+
+.rcsa-site-header__toggle .navbar-toggler-icon {
+  filter: brightness(200%);
+}
+
+@media (max-width: 1199.98px) {
+  .rcsa-site-header {
+    position: fixed;
+  }
+
+  .rcsa-site-header__nav {
+    padding-inline: var(--rcsa-spacing-scale-md);
+  }
+
+  .rcsa-site-header__item {
+    margin-inline: 0;
+    margin-block: 0.25rem;
+  }
+
+  .rcsa-site-header__link,
+  .rcsa-site-header__cta {
+    width: 100%;
+    justify-content: center;
+  }
+}

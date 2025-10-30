@@ -9,6 +9,7 @@ This document logs every asset introduced during Sprint 0 scaffolding, especiall
 | `docs/` | Planning notes, manifests, and decision records. |
 | `design-system/` | Future design tokens, shared UI assets, and style experiments. |
 | `legacy-reference/` | Read-only V6 snapshots for historical comparison. |
+| `portal-snapshots/` | Read-only V7 exports pulled via `pac paportal download` for GUID and metadata audits. |
 | `src/pages/home/` | Home page rebuild workbench. |
 | `src/pages/dashboard/` | Dashboard (1LoD/2LoD) rebuild workbench. |
 | `src/pages/wizassessment/` | Wizard assessment rebuild workbench. |

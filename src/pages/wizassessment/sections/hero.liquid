@@ -1,0 +1,58 @@
+{% assign hero_guid = page_guid | default: 'unknown-guid' %}
+<section
+  class="rcsa-wiz__hero container py-5"
+  data-wizard-section="hero"
+  data-page-guid="{{ hero_guid }}"
+>
+  <div class="row align-items-center g-4">
+    <div class="col-lg-7">
+      <p class="text-uppercase text-muted small mb-2">Guided wizard preview</p>
+      <h1 class="display-5 fw-semibold mb-3">
+        WizAssessment Wizard Shell
+      </h1>
+      <p class="lead mb-4">
+        Modular hero placeholder for the stepper-driven assessment rebuilt from
+        legacy evidence at
+        legacy-reference/powerpages/.../wizAssessment.en-US.webpage.copy.html:6935.
+        Agent 1.6B replaces this copy with content synced to the data contract.
+      </p>
+      <div class="d-flex flex-wrap gap-3">
+        <a class="btn btn-primary" href="#wiz-stepper">
+          Review Wizard Flow
+        </a>
+        <button
+          class="btn btn-outline-secondary"
+          type="button"
+          data-action="preview-export"
+        >
+          Preview Export Summary
+        </button>
+      </div>
+    </div>
+    <div class="col-lg-5">
+      <div class="card shadow-sm h-100 border-0">
+        <div class="card-body">
+          <h2 class="h5 fw-semibold mb-3">Assessment Snapshot</h2>
+          <dl class="row mb-0 small">
+            <div class="col-6 mb-2">
+              <dt class="text-muted">Assessment</dt>
+              <dd class="mb-0" data-process-name>Wire Transfer Assessment</dd>
+            </div>
+            <div class="col-6 mb-2">
+              <dt class="text-muted">Wizard GUID</dt>
+              <dd class="mb-0 font-monospace">{{ hero_guid }}</dd>
+            </div>
+            <div class="col-6 mb-2">
+              <dt class="text-muted">Modes Seeded</dt>
+              <dd class="mb-0" data-mode-count>--</dd>
+            </div>
+            <div class="col-6 mb-2">
+              <dt class="text-muted">Steps Available</dt>
+              <dd class="mb-0" data-step-count>--</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

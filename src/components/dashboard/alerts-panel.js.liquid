@@ -1,0 +1,40 @@
+(function () {
+  const container = document.querySelector("[data-alerts-list]");
+  if (!container) {
+    return;
+  }
+
+  const filterButtons = Array.from(
+    document.querySelectorAll("[data-alert-filter]")
+  );
+  if (!filterButtons.length) {
+    return;
+  }
+
+  function setActiveFilter(filter) {
+    filterButtons.forEach((button) => {
+      if (button.value === filter) {
+        button.classList.add("active");
+      } else {
+        button.classList.remove("active");
+      }
+    });
+  }
+
+  function applyFilter(filter) {
+    const cards = container.querySelectorAll("[data-alert-severity]");
+    cards.forEach((card) => {
+      const severity = card.getAttribute("data-alert-severity");
+      const shouldShow = filter === "all" || severity === filter;
+      card.classList.toggle("d-none", !shouldShow);
+    });
+  }
+
+  filterButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const filter = button.value || "all";
+      setActiveFilter(filter);
+      applyFilter(filter);
+    });
+  });
+})();

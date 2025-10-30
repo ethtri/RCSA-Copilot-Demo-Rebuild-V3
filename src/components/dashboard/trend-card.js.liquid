@@ -1,0 +1,98 @@
+(function () {
+  const cards = document.querySelectorAll(".dashboard-trend");
+  if (!cards.length) {
+    return;
+  }
+
+  const SVG_NS = "http://www.w3.org/2000/svg";
+
+  function renderSparkline(card, payload) {
+    const svg = card.querySelector("svg.dashboard-trend__sparkline");
+    if (!svg || !payload || !Array.isArray(payload.series)) {
+      return;
+    }
+
+    const primarySeries = payload.series[0];
+    if (!primarySeries || !Array.isArray(primarySeries.values)) {
+      return;
+    }
+
+    const values = primarySeries.values
+      .map((entry) => Number(entry.value))
+      .filter((value) => Number.isFinite(value));
+
+    if (!values.length) {
+      return;
+    }
+
+    const min = Math.min(...values);
+    const max = Math.max(...values);
+    const range = max - min || 1;
+    const height = 30;
+
+    const pathData = values
+      .map((value, index) => {
+        const x =
+          values.length === 1 ? 50 : (index / (values.length - 1)) * 100;
+        const offset = (value - min) / range;
+        const y = height - offset * height;
+        const command = index === 0 ? "M" : "L";
+        return `${command}${x.toFixed(2)} ${y.toFixed(2)}`;
+      })
+      .join(" ");
+
+    const line = document.createElementNS(SVG_NS, "path");
+    line.setAttribute("d", pathData);
+    line.setAttribute("fill", "none");
+    line.setAttribute("stroke", "currentColor");
+    line.setAttribute("stroke-width", "2");
+    line.classList.add("dashboard-trend__sparkline-path");
+
+    svg.innerHTML = "";
+    svg.appendChild(line);
+
+    if (Number.isFinite(primarySeries.target)) {
+      const targetOffset = (primarySeries.target - min) / range;
+      const targetY = height - targetOffset * height;
+      const targetLine = document.createElementNS(SVG_NS, "line");
+      targetLine.setAttribute("x1", "0");
+      targetLine.setAttribute("x2", "100");
+      targetLine.setAttribute("y1", targetY.toFixed(2));
+      targetLine.setAttribute("y2", targetY.toFixed(2));
+      targetLine.setAttribute("stroke", "var(--rcsa-accent, #ff6f61)");
+      targetLine.setAttribute("stroke-width", "1");
+      targetLine.setAttribute("stroke-dasharray", "4 3");
+      targetLine.classList.add("dashboard-trend__sparkline-target");
+      svg.appendChild(targetLine);
+    }
+  }
+
+  cards.forEach((card) => {
+    const payloadNode = card.querySelector("script[data-trend-payload]");
+    let payload;
+    if (payloadNode) {
+      try {
+        payload = JSON.parse(payloadNode.textContent);
+      } catch (error) {
+        console.warn("Unable to parse trend payload", error);
+      }
+    }
+
+    renderSparkline(card, payload);
+
+    const toggle = card.querySelector("[data-trend-toggle]");
+    const table = card.querySelector("[data-trend-table]");
+    if (toggle && table) {
+      toggle.addEventListener("click", () => {
+        const isHidden = table.hasAttribute("hidden");
+        if (isHidden) {
+          table.removeAttribute("hidden");
+        } else {
+          table.setAttribute("hidden", "");
+        }
+        const expanded = table.hasAttribute("hidden") ? "false" : "true";
+        toggle.setAttribute("aria-expanded", expanded);
+      });
+    }
+  });
+})();

@@ -47,7 +47,7 @@ Agents attach the completed checklist (inline or comment) when handing off work 
 | R2 | Sandbox GUID/config mismatches cause deployment failures | High deployment delays | Release Engineer | Store GUID `a73cd7d7-71c2-4e01-a147-de5dcbb80683` in tracker; rehearse CLI loop by Day 11 | Open |
 | R3 | Legacy assets copied without manifest entry | Medium traceability gap | Product Owner | Require manifest review during DoD sign-off | Open |
 | R4 | Parallel agents overwrite shared header/template work | High rework | Agent Coordinator | Follow dependency map (Section 7) and enforce sequential steps for header updates | Open |
-| R5 | Blueprint requires new data-contract stubs under `docs/data-contracts/` that are not yet provisioned | Medium integration delays | Tech Lead | Seed placeholders and schema workflow in Sprint 1 kickoff; anchor follow-up in Sprint 1 plan Section 4 | Mitigated (Sprint 1 Day 1) |
+| R5 | Blueprint requires new data-contract stubs under `docs/data-contracts/` that are not yet provisioned | Medium integration delays | Tech Lead | Seed placeholders and schema workflow in Sprint 1 kickoff; anchor follow-up in Sprint 1 plan Section 4 | Mitigated (Sprint 1 Day 3 - data mocks & layout hand-off landed) |
 
 ## 7. Dependency Map & Parallelization Guidance
 - **Sequential**: Header/nav foundation → Page migrations → CLI validation. Agents modifying shared templates or design tokens run sequentially to avoid conflicts (0.1, 0.2, 0.3R).

@@ -1,0 +1,99 @@
+{% assign queue = include.queue %}
+{% if queue %}
+  {% assign owner = queue.owner %}
+  {% assign items = queue.items | default: '' %}
+  <section class="dashboard-section dashboard-action-queue">
+    <div class="container">
+      <div class="dashboard-section__header d-flex flex-column flex-lg-row justify-content-between align-items-start align-items-lg-center mb-3">
+        <div>
+          <h2 class="dashboard-section__title h4 mb-1">
+            Action Queue
+          </h2>
+          <p class="dashboard-section__hint mb-0 text-muted">
+            {% if owner %}
+              Owned by {{ owner }} – sourced from dashboard contract `actionQueue`.
+            {% else %}
+              Tasks sourced from dashboard contract `actionQueue`.
+            {% endif %}
+          </p>
+        </div>
+        <div class="dashboard-action-queue__filters mt-3 mt-lg-0 d-flex align-items-center gap-2">
+          <label class="form-label mb-0" for="dashboard-action-filter">
+            Status
+          </label>
+          <select class="form-select form-select-sm" id="dashboard-action-filter" data-action-filter>
+            <option value="all" selected>All</option>
+            <option value="not-started">Not started</option>
+            <option value="in-progress">In progress</option>
+            <option value="blocked">Blocked</option>
+            <option value="completed">Completed</option>
+          </select>
+        </div>
+      </div>
+      <div class="dashboard-action-queue__list row g-3" data-action-list>
+        {% if items and items != empty %}
+          {% for item in items %}
+            <div class="col-12 col-lg-4">
+              <article class="dashboard-action card h-100 status-{{ item.status }}" data-action-status="{{ item.status }}">
+                <div class="card-body">
+                  <header class="dashboard-action__header mb-2">
+                    <h3 class="dashboard-action__title h6 mb-1">
+                      {{ item.title }}
+                    </h3>
+                    {% if item.owner %}
+                      <p class="dashboard-action__owner text-muted mb-0">
+                        Owner: {{ item.owner }}
+                      </p>
+                    {% endif %}
+                  </header>
+                  <dl class="dashboard-action__meta">
+                    <div class="dashboard-action__meta-item">
+                      <dt>Status</dt>
+                      <dd class="text-capitalize">{{ item.status | replace: '-', ' ' }}</dd>
+                    </div>
+                    {% if item.dueDate %}
+                      <div class="dashboard-action__meta-item">
+                        <dt>Due</dt>
+                        <dd>
+                          <time datetime="{{ item.dueDate }}">
+                            {{ item.dueDate | date: "%b %d, %Y" }}
+                          </time>
+                        </dd>
+                      </div>
+                    {% endif %}
+                    {% if item.linkedRiskId %}
+                      <div class="dashboard-action__meta-item">
+                        <dt>Linked risk</dt>
+                        <dd>{{ item.linkedRiskId }}</dd>
+                      </div>
+                    {% endif %}
+                  </dl>
+                  {% if item.tags and item.tags != empty %}
+                    <ul class="dashboard-action__tags list-inline mt-3 mb-0">
+                      {% for tag in item.tags %}
+                        <li class="list-inline-item badge text-bg-light">
+                          {{ tag }}
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  {% endif %}
+                </div>
+              </article>
+            </div>
+          {% endfor %}
+        {% else %}
+          <div class="col-12">
+            <div class="alert alert-secondary mb-0">
+              No actions queued in the current payload.
+            </div>
+          </div>
+        {% endif %}
+      </div>
+      {% if items and items != empty %}
+        <div class="dashboard-action-queue__footnote text-muted mt-3 small">
+          {{ items | size }} items surfaced from the mock payload.
+        </div>
+      {% endif %}
+    </div>
+  </section>
+{% endif %}
